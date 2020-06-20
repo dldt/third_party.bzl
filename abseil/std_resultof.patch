@@ -1,0 +1,25 @@
+From 6529b56246a9a4d65eec0c96c17be242930d833e Mon Sep 17 00:00:00 2001
+From: Stijn Herfst <stijnherfst@outlook.com>
+Date: Tue, 26 May 2020 23:11:04 +0200
+Subject: [PATCH] Add C++20 alternative for result_of_t
+
+---
+ absl/meta/type_traits.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/absl/meta/type_traits.h b/absl/meta/type_traits.h
+index ba87d2f0..c7258aff 100644
+--- a/absl/meta/type_traits.h
++++ b/absl/meta/type_traits.h
+@@ -617,7 +617,11 @@ template <typename T>
+ using underlying_type_t = typename std::underlying_type<T>::type;
+ 
+ template <typename T>
++#ifdef __cpp_lib_is_invocable
++using result_of_t = typename std::invoke_result<T>::type;
++#elif
+ using result_of_t = typename std::result_of<T>::type;
++#endif
+ 
+ namespace type_traits_internal {
+ // In MSVC we can't probe std::hash or stdext::hash because it triggers a

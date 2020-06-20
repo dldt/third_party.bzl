@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push: {}
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, windows, macOS]
+        include:
+          - os: ubuntu
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
+            bazelcachepath: "/home/runner/.cache/bazel/_bazel_runner"
+          - os: windows
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-windows-amd64.exe
+            bazelcachepath: "/Users/runner/_bazel_runner"
+          - os: macOS
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-darwin-amd64
+            bazelcachepath: "/Users/runner/.cache/bazel/_bazel_runner"
+
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+    - name: Setting up compiler (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt update
+        sudo apt install -y gcc-10 g++-10
+        sudo apt install -y libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev mesa-common-dev libglvnd-dev
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+        token: ${{ secrets.REPOSITORY_TOKEN }}
+
+    - name: Mount bazel cache
+      uses: actions/cache@v2
+      with:
+        path: "${{ matrix.bazelcachepath }}"
+        key: ${{ runner.os }}-bazel
+
+    - name: Install bazelisk
+      run: |
+        New-Item -Type Directory -Path "${ENV:GITHUB_WORKSPACE}/bin/"
+        Invoke-WebRequest -Uri "${{ matrix.bazelisk }}" -OutFile "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe"
+        if ("${{ matrix.os }}" -ne "windows") {
+          & chmod +x "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe"
+        }
+      shell: pwsh
+
+    - name: Build
+      run: |
+        if ( "${{ runner.os }}" -Eq "Linux" ) {
+          ${ENV:CC} = "gcc-10"
+          ${ENV:CXX} = "g++-10"
+        }
+        [String[]]${PACKAGES} = & bazel query ...:* --output=package | ? { -not [String]::IsNullOrEmpty($_) }
+        # Filter out boost and abseil for now
+        ${QUERY_SPEC} = (${PACKAGES} | % { "@${_}//:all" }) -Join " union "
+        [String[]]${TARGETS} = & bazel query "visible(...:*, ${QUERY_SPEC})"
+        & "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe" build --keep_going ${TARGETS}
+        if ($LastExitCode -ne "0") {
+          Write-Host "The following failed to build:"
+          & "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe" build --check_up_to_date --show_result 0 ${TARGETS}
+          exit 1
+        }
+      shell: pwsh

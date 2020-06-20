@@ -1,0 +1,44 @@
+From 4d87e19b0162197e9bb8f3476d92fb876632ec83 Mon Sep 17 00:00:00 2001
+From: Charles Milette <charles.milette@gmail.com>
+Date: Sun, 29 Mar 2020 19:47:18 -0400
+Subject: [PATCH] Fix usage of result_of under C++20
+
+---
+ googlemock/include/gmock/gmock-actions.h               |  2 +-
+ .../include/gmock/internal/gmock-internal-utils.h      | 10 ++++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/googlemock/include/gmock/gmock-actions.h b/googlemock/include/gmock/gmock-actions.h
+index b4127e933..4f7d99f72 100644
+--- a/googlemock/include/gmock/gmock-actions.h
++++ b/googlemock/include/gmock/gmock-actions.h
+@@ -970,7 +970,7 @@ struct InvokeMethodWithoutArgsAction {
+   Class* const obj_ptr;
+   const MethodPtr method_ptr;
+ 
+-  using ReturnType = typename std::result_of<MethodPtr(Class*)>::type;
++  using ReturnType = typename InvokeResult<MethodPtr, Class*>::type;
+ 
+   template <typename... Args>
+   ReturnType operator()(const Args&...) const {
+diff --git a/googlemock/include/gmock/internal/gmock-internal-utils.h b/googlemock/include/gmock/internal/gmock-internal-utils.h
+index 66cf857b7..b2df5b476 100644
+--- a/googlemock/include/gmock/internal/gmock-internal-utils.h
++++ b/googlemock/include/gmock/internal/gmock-internal-utils.h
+@@ -460,6 +460,16 @@ struct Function<R(Args...)> {
+ template <typename R, typename... Args>
+ constexpr size_t Function<R(Args...)>::ArgumentCount;
+ 
++// C++11 and 14 compatible invoke_result
++template<typename C, typename... Args>
++struct InvokeResult {
++#ifdef __cpp_lib_is_invocable
++  typedef typename std::invoke_result<C, Args...>::type type;
++#else
++  typedef typename std::result_of<C(Args...)>::type type;
++#endif
++};
++
+ #ifdef _MSC_VER
+ # pragma warning(pop)
+ #endif
