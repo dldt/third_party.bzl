@@ -1,0 +1,9 @@
+# Automatically bind platform related configuration
+build --enable_platform_specific_config
+
+# Disable ccache caching. By default $HOME located cache space is readonly to bazel
+# (this could still be worked around with --sandbox_writable_path=)
+# But given that bazel already does this caching work for us. simply disable ccache
+build:unix --action_env=CCACHE_DISABLE=1
+build:linux --config=unix
+build:macos --config=macos
