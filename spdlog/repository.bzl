@@ -6,9 +6,9 @@ def spdlog_repository():
         http_archive,
         name = "spdlog",
         urls = [
-            "https://github.com/gabime/spdlog/archive/v1.6.1.zip",
+            "https://github.com/gabime/spdlog/archive/v1.8.1.zip",
         ],
-        sha256 = "901f204af09523cd42e069d6aa0ca05c611cd0719be4662ce6342c6c58f96719",
-        strip_prefix = "spdlog-1.6.1/",
+        sha256 = "eed0095a1d52d08a0834feda146d4f9148fa4125620cd04d8ea57e0238fa39cd",
+        strip_prefix = "spdlog-1.8.1/",
         build_file = "@third_party//spdlog:package.BUILD",
     )
