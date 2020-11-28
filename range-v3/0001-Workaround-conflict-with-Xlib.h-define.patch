@@ -1,0 +1,532 @@
+From 1217654cc310bf9c0e52b062ee1be0cc2c5feb6e Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 28 Nov 2020 06:36:23 +0100
+Subject: [PATCH] Workaround conflict with Xlib.h  define
+
+---
+ include/range/v3/view/interface.hpp | 282 ++++++++++++++--------------
+ 1 file changed, 141 insertions(+), 141 deletions(-)
+
+diff --git a/include/range/v3/view/interface.hpp b/include/range/v3/view/interface.hpp
+index 6c63dbf5e..91d63ad01 100644
+--- a/include/range/v3/view/interface.hpp
++++ b/include/range/v3/view/interface.hpp
+@@ -157,71 +157,71 @@ namespace ranges
+             return Cardinality == 0;
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND (Cardinality < 0) AND (Cardinality != infinite) AND
+-                (!forward_range<D<True>>) AND sized_range<D<True>>)
++            requires Truth AND (Cardinality < 0) AND (Cardinality != infinite) AND
++                (!forward_range<D<Truth>>) AND sized_range<D<Truth>>)
+         constexpr bool empty() //
+-            noexcept(noexcept(bool(ranges::size(std::declval<D<True> &>()) == 0)))
++            noexcept(noexcept(bool(ranges::size(std::declval<D<Truth> &>()) == 0)))
+         {
+             return ranges::size(derived()) == 0;
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND (Cardinality < 0) AND (Cardinality != infinite) AND
+-                (!forward_range<D<True> const>) AND sized_range<D<True> const>)
++            requires Truth AND (Cardinality < 0) AND (Cardinality != infinite) AND
++                (!forward_range<D<Truth> const>) AND sized_range<D<Truth> const>)
+         constexpr bool empty() const //
+-            noexcept(noexcept(bool(ranges::size(std::declval<D<True> const &>()) == 0)))
++            noexcept(noexcept(bool(ranges::size(std::declval<D<Truth> const &>()) == 0)))
+         {
+             return ranges::size(derived()) == 0;
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND (!detail::has_fixed_size_<Cardinality>) AND
+-                forward_range<D<True>>)
++            requires Truth AND (!detail::has_fixed_size_<Cardinality>) AND
++                forward_range<D<Truth>>)
+         constexpr bool empty() noexcept(
+-            noexcept(bool(ranges::begin(std::declval<D<True> &>()) ==
+-                          ranges::end(std::declval<D<True> &>()))))
++            noexcept(bool(ranges::begin(std::declval<D<Truth> &>()) ==
++                          ranges::end(std::declval<D<Truth> &>()))))
+         {
+             return bool(ranges::begin(derived()) == ranges::end(derived()));
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND (!detail::has_fixed_size_<Cardinality>) AND
+-                forward_range<D<True> const>)
++            requires Truth AND (!detail::has_fixed_size_<Cardinality>) AND
++                forward_range<D<Truth> const>)
+         constexpr bool empty() const
+-            noexcept(noexcept(bool(ranges::begin(std::declval<D<True> const &>()) ==
+-                                   ranges::end(std::declval<D<True> const &>()))))
++            noexcept(noexcept(bool(ranges::begin(std::declval<D<Truth> const &>()) ==
++                                   ranges::end(std::declval<D<Truth> const &>()))))
+         {
+             return bool(ranges::begin(derived()) == ranges::end(derived()));
+         }
+-        CPP_template_gcc_workaround(bool True = true)(
++        CPP_template_gcc_workaround(bool Truth = true)(
+             /// \pre
+-            requires True && detail::can_empty_<D<True>>) // clang-format off
++            requires Truth && detail::can_empty_<D<Truth>>) // clang-format off
+         constexpr explicit operator bool()
+-            noexcept(noexcept(ranges::empty(std::declval<D<True> &>())))
++            noexcept(noexcept(ranges::empty(std::declval<D<Truth> &>())))
+         {
+             return !ranges::empty(derived());
+         }
+         // clang-format on
+         /// \overload
+-        CPP_template_gcc_workaround(bool True = true)(
++        CPP_template_gcc_workaround(bool Truth = true)(
+             /// \pre
+-            requires True && detail::can_empty_<D<True> const>) // clang-format off
++            requires Truth && detail::can_empty_<D<Truth> const>) // clang-format off
+         constexpr explicit operator bool() const
+-            noexcept(noexcept(ranges::empty(std::declval<D<True> const &>())))
++            noexcept(noexcept(ranges::empty(std::declval<D<Truth> const &>())))
+         {
+             return !ranges::empty(derived());
+         }
+         // clang-format on
+         /// If the size of the range is known at compile-time and finite,
+         /// return it.
+-        template(bool True = true, int = 42)(
++        template(bool Truth = true, int = 42)(
+             /// \pre
+-            requires True AND (Cardinality >= 0)) //
++            requires Truth AND (Cardinality >= 0)) //
+         static constexpr std::size_t size() noexcept
+         {
+             return static_cast<std::size_t>(Cardinality);
+@@ -229,101 +229,101 @@ namespace ranges
+         /// If `sized_sentinel_for<sentinel_t<Derived>, iterator_t<Derived>>` is
+         /// satisfied, and if `Derived` is a `forward_range`, then return
+         /// `end - begin` cast to an unsigned integer.
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND (Cardinality < 0) AND
+-                sized_sentinel_for<sentinel_t<D<True>>, iterator_t<D<True>>> AND
+-                forward_range<D<True>>)
+-        constexpr detail::iter_size_t<iterator_t<D<True>>> size()
++            requires Truth AND (Cardinality < 0) AND
++                sized_sentinel_for<sentinel_t<D<Truth>>, iterator_t<D<Truth>>> AND
++                forward_range<D<Truth>>)
++        constexpr detail::iter_size_t<iterator_t<D<Truth>>> size()
+         {
+-            using size_type = detail::iter_size_t<iterator_t<D<True>>>;
++            using size_type = detail::iter_size_t<iterator_t<D<Truth>>>;
+             return static_cast<size_type>(derived().end() - derived().begin());
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND (Cardinality < 0) AND
+-                sized_sentinel_for<sentinel_t<D<True> const>,
+-                                   iterator_t<D<True> const>> AND
+-                forward_range<D<True> const>)
+-        constexpr detail::iter_size_t<iterator_t<D<True>>> size() const //
++            requires Truth AND (Cardinality < 0) AND
++                sized_sentinel_for<sentinel_t<D<Truth> const>,
++                                   iterator_t<D<Truth> const>> AND
++                forward_range<D<Truth> const>)
++        constexpr detail::iter_size_t<iterator_t<D<Truth>>> size() const //
+         {
+-            using size_type = detail::iter_size_t<iterator_t<D<True>>>;
++            using size_type = detail::iter_size_t<iterator_t<D<Truth>>>;
+             return static_cast<size_type>(derived().end() - derived().begin());
+         }
+         /// Access the first element in a range:
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND forward_range<D<True>>)
+-        constexpr range_reference_t<D<True>> front()
++            requires Truth AND forward_range<D<Truth>>)
++        constexpr range_reference_t<D<Truth>> front()
+         {
+             return *derived().begin();
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND forward_range<D<True> const>)
+-        constexpr range_reference_t<D<True> const> front() const
++            requires Truth AND forward_range<D<Truth> const>)
++        constexpr range_reference_t<D<Truth> const> front() const
+         {
+             return *derived().begin();
+         }
+         /// Access the last element in a range:
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND common_range<D<True>> AND bidirectional_range<D<True>>)
+-        constexpr range_reference_t<D<True>> back()
++            requires Truth AND common_range<D<Truth>> AND bidirectional_range<D<Truth>>)
++        constexpr range_reference_t<D<Truth>> back()
+         {
+             return *prev(derived().end());
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND common_range<D<True> const> AND
+-                bidirectional_range<D<True> const>)
+-        constexpr range_reference_t<D<True> const> back() const
++            requires Truth AND common_range<D<Truth> const> AND
++                bidirectional_range<D<Truth> const>)
++        constexpr range_reference_t<D<Truth> const> back() const
+         {
+             return *prev(derived().end());
+         }
+         /// Simple indexing:
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND random_access_range<D<True>>)
+-        constexpr range_reference_t<D<True>> operator[](range_difference_t<D<True>> n)
++            requires Truth AND random_access_range<D<Truth>>)
++        constexpr range_reference_t<D<Truth>> operator[](range_difference_t<D<Truth>> n)
+         {
+             return derived().begin()[n];
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND random_access_range<D<True> const>)
+-        constexpr range_reference_t<D<True> const> //
+-        operator[](range_difference_t<D<True>> n) const
++            requires Truth AND random_access_range<D<Truth> const>)
++        constexpr range_reference_t<D<Truth> const> //
++        operator[](range_difference_t<D<Truth>> n) const
+         {
+             return derived().begin()[n];
+         }
+         /// Returns a pointer to the block of memory
+         /// containing the elements of a contiguous range:
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND contiguous_iterator<iterator_t<D<True>>>)
+-        constexpr std::add_pointer_t<range_reference_t<D<True>>> data() //
++            requires Truth AND contiguous_iterator<iterator_t<D<Truth>>>)
++        constexpr std::add_pointer_t<range_reference_t<D<Truth>>> data() //
+         {
+             return std::addressof(*ranges::begin(derived()));
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND contiguous_iterator<iterator_t<D<True> const>>)
+-        constexpr std::add_pointer_t<range_reference_t<D<True> const>> data() const //
++            requires Truth AND contiguous_iterator<iterator_t<D<Truth> const>>)
++        constexpr std::add_pointer_t<range_reference_t<D<Truth> const>> data() const //
+         {
+             return std::addressof(*ranges::begin(derived()));
+         }
+         /// Returns a reference to the element at specified location pos, with bounds
+         /// checking.
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND random_access_range<D<True>> AND sized_range<D<True>>)
+-        constexpr range_reference_t<D<True>> at(range_difference_t<D<True>> n)
++            requires Truth AND random_access_range<D<Truth>> AND sized_range<D<Truth>>)
++        constexpr range_reference_t<D<Truth>> at(range_difference_t<D<Truth>> n)
+         {
+             using size_type = range_size_t<Derived>;
+             if(n < 0 || size_type(n) >= ranges::size(derived()))
+@@ -333,11 +333,11 @@ namespace ranges
+             return derived().begin()[n];
+         }
+         /// \overload
+-        template(bool True = true)(
++        template(bool Truth = true)(
+             /// \pre
+-            requires True AND random_access_range<D<True> const> AND
+-                sized_range<D<True> const>)
+-        constexpr range_reference_t<D<True> const> at(range_difference_t<D<True>> n) const
++            requires Truth AND random_access_range<D<Truth> const> AND
++                sized_range<D<Truth> const>)
++        constexpr range_reference_t<D<Truth> const> at(range_difference_t<D<Truth>> n) const
+         {
+             using size_type = range_size_t<Derived const>;
+             if(n < 0 || size_type(n) >= ranges::size(derived()))
+@@ -348,188 +348,188 @@ namespace ranges
+         }
+         /// Python-ic slicing:
+         //      rng[{4,6}]
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True> &>)
++            requires Truth AND input_range<D<Truth> &>)
+         constexpr auto
+-            operator[](detail::slice_bounds<range_difference_t<D<True>>> offs) &
++            operator[](detail::slice_bounds<range_difference_t<D<Truth>>> offs) &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True> const &>)
++            requires Truth AND input_range<D<Truth> const &>)
+         constexpr auto
+-            operator[](detail::slice_bounds<range_difference_t<D<True>>> offs) const &
++            operator[](detail::slice_bounds<range_difference_t<D<Truth>>> offs) const &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True>>)
++            requires Truth AND input_range<D<Truth>>)
+         constexpr auto
+-            operator[](detail::slice_bounds<range_difference_t<D<True>>> offs) &&
++            operator[](detail::slice_bounds<range_difference_t<D<Truth>>> offs) &&
+         {
+             return Slice{}(detail::move(derived()), offs.from, offs.to);
+         }
+         //      rng[{4,end-2}]
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True> &> AND sized_range<D<True> &>)
++            requires Truth AND input_range<D<Truth> &> AND sized_range<D<Truth> &>)
+         constexpr auto //
+-        operator[](detail::slice_bounds<range_difference_t<D<True>>,
+-                                        detail::from_end_of_t<D<True>>> offs) &
++        operator[](detail::slice_bounds<range_difference_t<D<Truth>>,
++                                        detail::from_end_of_t<D<Truth>>> offs) &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True> const &> AND
+-                sized_range<D<True> const &>)
++            requires Truth AND input_range<D<Truth> const &> AND
++                sized_range<D<Truth> const &>)
+         constexpr auto //
+-        operator[](detail::slice_bounds<range_difference_t<D<True>>,
+-                                        detail::from_end_of_t<D<True>>> offs) const &
++        operator[](detail::slice_bounds<range_difference_t<D<Truth>>,
++                                        detail::from_end_of_t<D<Truth>>> offs) const &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True>> AND sized_range<D<True>>)
++            requires Truth AND input_range<D<Truth>> AND sized_range<D<Truth>>)
+         constexpr auto //
+-        operator[](detail::slice_bounds<range_difference_t<D<True>>,
+-                                        detail::from_end_of_t<D<True>>> offs) &&
++        operator[](detail::slice_bounds<range_difference_t<D<Truth>>,
++                                        detail::from_end_of_t<D<Truth>>> offs) &&
+         {
+             return Slice{}(detail::move(derived()), offs.from, offs.to);
+         }
+         //      rng[{end-4,end-2}]
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND (forward_range<D<True> &> ||
+-                              (input_range<D<True> &> && sized_range<D<True> &>))) //
++            requires Truth AND (forward_range<D<Truth> &> ||
++                              (input_range<D<Truth> &> && sized_range<D<Truth> &>))) //
+         constexpr auto //
+-        operator[](detail::slice_bounds<detail::from_end_of_t<D<True>>,
+-                                        detail::from_end_of_t<D<True>>> offs) &
++        operator[](detail::slice_bounds<detail::from_end_of_t<D<Truth>>,
++                                        detail::from_end_of_t<D<Truth>>> offs) &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND
+-            (forward_range<D<True> const &> ||
+-             (input_range<D<True> const &> && sized_range<D<True> const &>))) //
++            requires Truth AND
++            (forward_range<D<Truth> const &> ||
++             (input_range<D<Truth> const &> && sized_range<D<Truth> const &>))) //
+         constexpr auto //
+-        operator[](detail::slice_bounds<detail::from_end_of_t<D<True>>,
+-                                        detail::from_end_of_t<D<True>>> offs) const &
++        operator[](detail::slice_bounds<detail::from_end_of_t<D<Truth>>,
++                                        detail::from_end_of_t<D<Truth>>> offs) const &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND
+-                (forward_range<D<True>> ||
+-                    (input_range<D<True>> && sized_range<D<True>>))) //
++            requires Truth AND
++                (forward_range<D<Truth>> ||
++                    (input_range<D<Truth>> && sized_range<D<Truth>>))) //
+         constexpr auto //
+-        operator[](detail::slice_bounds<detail::from_end_of_t<D<True>>,
+-                                        detail::from_end_of_t<D<True>>> offs) &&
++        operator[](detail::slice_bounds<detail::from_end_of_t<D<Truth>>,
++                                        detail::from_end_of_t<D<Truth>>> offs) &&
+         {
+             return Slice{}(detail::move(derived()), offs.from, offs.to);
+         }
+         //      rng[{4,end}]
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True> &>)
++            requires Truth AND input_range<D<Truth> &>)
+         constexpr auto //
+-        operator[](detail::slice_bounds<range_difference_t<D<True>>, end_fn> offs) &
++        operator[](detail::slice_bounds<range_difference_t<D<Truth>>, end_fn> offs) &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True> const &>)
++            requires Truth AND input_range<D<Truth> const &>)
+         constexpr auto //
+-        operator[](detail::slice_bounds<range_difference_t<D<True>>, end_fn> offs) const &
++        operator[](detail::slice_bounds<range_difference_t<D<Truth>>, end_fn> offs) const &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND input_range<D<True>>)
++            requires Truth AND input_range<D<Truth>>)
+         constexpr auto //
+-        operator[](detail::slice_bounds<range_difference_t<D<True>>, end_fn> offs) &&
++        operator[](detail::slice_bounds<range_difference_t<D<Truth>>, end_fn> offs) &&
+         {
+             return Slice{}(detail::move(derived()), offs.from, offs.to);
+         }
+         //      rng[{end-4,end}]
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND
+-                (forward_range<D<True> &> ||
+-                    (input_range<D<True> &> && sized_range<D<True> &>))) //
++            requires Truth AND
++                (forward_range<D<Truth> &> ||
++                    (input_range<D<Truth> &> && sized_range<D<Truth> &>))) //
+         constexpr auto //
+-        operator[](detail::slice_bounds<detail::from_end_of_t<D<True>>, end_fn> offs) &
++        operator[](detail::slice_bounds<detail::from_end_of_t<D<Truth>>, end_fn> offs) &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND
+-                (forward_range<D<True> const &> ||
+-                    (input_range<D<True> const &> && sized_range<D<True> const &>))) //
++            requires Truth AND
++                (forward_range<D<Truth> const &> ||
++                    (input_range<D<Truth> const &> && sized_range<D<Truth> const &>))) //
+         constexpr auto //
+         operator[](
+-            detail::slice_bounds<detail::from_end_of_t<D<True>>, end_fn> offs) const &
++            detail::slice_bounds<detail::from_end_of_t<D<Truth>>, end_fn> offs) const &
+         {
+             return Slice{}(derived(), offs.from, offs.to);
+         }
+         /// \overload
+-        template(bool True = true, typename Slice = views::slice_fn)(
++        template(bool Truth = true, typename Slice = views::slice_fn)(
+             /// \pre
+-            requires True AND
+-                (forward_range<D<True>> ||
+-                    (input_range<D<True>> && sized_range<D<True>>))) //
++            requires Truth AND
++                (forward_range<D<Truth>> ||
++                    (input_range<D<Truth>> && sized_range<D<Truth>>))) //
+         constexpr auto //
+-        operator[](detail::slice_bounds<detail::from_end_of_t<D<True>>, end_fn> offs) &&
++        operator[](detail::slice_bounds<detail::from_end_of_t<D<Truth>>, end_fn> offs) &&
+         {
+             return Slice{}(detail::move(derived()), offs.from, offs.to);
+         }
+     private:
+         /// \brief Print a range to an ostream
+-        template<bool True = true>
++        template<bool Truth = true>
+         friend auto operator<<(std::ostream & sout, Derived const & rng)
+             -> CPP_broken_friend_ret(std::ostream &)(
+                 /// \pre
+-                requires True && input_range<D<True> const>)
++                requires Truth && input_range<D<Truth> const>)
+         {
+             return detail::print_rng_(sout, rng);
+         }
+         /// \overload
+-        template<bool True = true>
++        template<bool Truth = true>
+         friend auto operator<<(std::ostream & sout, Derived & rng)
+             -> CPP_broken_friend_ret(std::ostream &)(
+                 /// \pre
+-                requires True && (!range<D<True> const>) && input_range<D<True>>)
++                requires Truth && (!range<D<Truth> const>) && input_range<D<Truth>>)
+         {
+             return detail::print_rng_(sout, rng);
+         }
+         /// \overload
+-        template<bool True = true>
++        template<bool Truth = true>
+         friend auto operator<<(std::ostream & sout, Derived && rng)
+             -> CPP_broken_friend_ret(std::ostream &)(
+                 /// \pre
+-                requires True && (!range<D<True> const>) && input_range<D<True>>)
++                requires Truth && (!range<D<Truth> const>) && input_range<D<Truth>>)
+         {
+             return detail::print_rng_(sout, rng);
+         }
+-- 
+2.28.0
+
