@@ -11,6 +11,6 @@ def range_v3_repository():
         sha256 = "269e6a5ec8ac9967d5a052e6e312caff5e9f739b149feb402d13719af967b2d6",
         strip_prefix = "range-v3-0.11.0/",
         build_file = "@third_party//range-v3:package.BUILD",
-        patches = ["@third_party//range-v3:0001-Workaround-conflict-with-Xlib.h-define.patch", "@third_party//range-v3:0002-Workaround-g-10.2-crash-by-removing-constify_if-alia.patch"],
+        patches = ["@third_party//range-v3:0001-Workaround-conflict-with-Xlib.h-define.patch"],
         patch_args = ["-p1"],
     )
