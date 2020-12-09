@@ -7,5 +7,6 @@ cc_library(
     include_prefix = "vulkan-memory-allocator/",
     strip_include_prefix = "src",
     visibility = ["//visibility:public"],
-    deps = ["@vulkan"],
+    deps = ["@volk"],
+    local_defines = ["VMA_STATIC_VULKAN_FUNCTIONS=1"],
 )
