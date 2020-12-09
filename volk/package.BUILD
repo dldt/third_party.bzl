@@ -30,7 +30,7 @@ cc_library(
         "windows": ["VK_USE_PLATFORM_WIN32_KHR"],
         "linux": ["VK_USE_PLATFORM_XCB_KHR"],
         "osx": ["VK_USE_PLATFORM_MACOS_MVK"],
-    }),
+    }) + ["VK_NO_PROTOTYPES", "VOLK_STATIC_DEFINES"],
     includes = ["."],
     visibility = ["//visibility:public"],
     deps = ["@vulkan"],
