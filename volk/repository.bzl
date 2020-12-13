@@ -6,9 +6,9 @@ def volk_repository():
         http_archive,
         name = "volk",
         urls = [
-            "https://github.com/zeux/volk/archive/3e47b23ff02d975054d382eae8cea0a9b7c5d328.zip",
+            "https://github.com/zeux/volk/archive/1.2.162.zip",
         ],
-        sha256 = "0b4b9d6f1a3d55a84edddec2f3afa96a5e822496758dd96e9b3d2d3b8f342344",
-        strip_prefix = "volk-3e47b23ff02d975054d382eae8cea0a9b7c5d328/",
+        sha256 = "3c14dcb1d9d5400806ea192bf29546ce46707b5bc73409ae7ab536b9796bfc93",
+        strip_prefix = "volk-1.2.162/",
         build_file = "@third_party//volk:package.BUILD",
     )
