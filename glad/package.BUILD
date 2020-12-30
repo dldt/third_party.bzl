@@ -1,3 +1,4 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@rules_python//python:python.bzl", "py_binary")
 
 py_binary(
