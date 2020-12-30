@@ -75,6 +75,7 @@ cc_library(
     hdrs = glob([
         "glslc/src/*.h",
     ]),
+    visibility = ["//visibility:public"],
     deps = [
         ":libshaderc",
         "@spirv-tools//:spirv_tools_opt",
@@ -84,5 +85,6 @@ cc_library(
 cc_binary(
     name = "glslc",
     srcs = ["glslc/src/main.cc"],
+    visibility = ["//visibility:public"],
     deps = [":libglslc"],
 )
