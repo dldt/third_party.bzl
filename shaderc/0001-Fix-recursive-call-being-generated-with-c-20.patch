@@ -1,0 +1,25 @@
+From c1f183a06cfd216ef1240a60ff4eadb8a81cd6c6 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Wed, 30 Dec 2020 16:04:41 +0100
+Subject: [PATCH] Fix recursive call being generated with c++20
+
+---
+ libshaderc_util/include/libshaderc_util/string_piece.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libshaderc_util/include/libshaderc_util/string_piece.h b/libshaderc_util/include/libshaderc_util/string_piece.h
+index 5b8efe5..d4fe39e 100644
+--- a/libshaderc_util/include/libshaderc_util/string_piece.h
++++ b/libshaderc_util/include/libshaderc_util/string_piece.h
+@@ -330,7 +330,7 @@ inline std::ostream& operator<<(std::ostream& os, const string_piece& piece) {
+ }
+ 
+ inline bool operator==(const char* first, const string_piece second) {
+-  return second == first;
++  return second.operator==(first);
+ }
+ 
+ inline bool operator!=(const char* first, const string_piece second) {
+-- 
+2.29.2
+
