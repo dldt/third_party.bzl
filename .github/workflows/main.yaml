@@ -61,14 +61,5 @@ jobs:
           ${ENV:CC} = "gcc-10"
           ${ENV:CXX} = "g++-10"
         }
-        [String[]]${PACKAGES} = & bazel query ...:* --output=package | ? { -not [String]::IsNullOrEmpty($_) }
-        # Filter out boost and abseil for now
-        ${QUERY_SPEC} = (${PACKAGES} | % { "@${_}//:all" }) -Join " union "
-        [String[]]${TARGETS} = & bazel query "visible(...:*, ${QUERY_SPEC})"
-        & "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe" build --keep_going ${TARGETS}
-        if ($LastExitCode -ne "0") {
-          Write-Host "The following failed to build:"
-          & "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe" build --check_up_to_date --show_result 0 ${TARGETS}
-          exit 1
-        }
+        & ./build-all.ps1
       shell: pwsh
