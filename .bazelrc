@@ -28,7 +28,8 @@ build:unix --cxxopt="-std=gnu++2a" --host_cxxopt="-std=gnu++2a" --action_env="CC
 
 ## Linux specific
 build:linux --config=unix
-build:linux --cxxopt="-pthread" --host_cxxopt="-pthread"
+build:linux --copt="-pthread" --host_copt="-pthread"
+build:linux --conlyopt="-std=c17" --host_conlyopt="-std=c17"
 build:linux --linkopt="-pthread" --host_linkopt="-pthread"
 
 ## MacOS specific
