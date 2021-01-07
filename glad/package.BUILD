@@ -29,5 +29,6 @@ cc_library(
         ":glad.h",
         ":khrplatform.h",
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
 )
