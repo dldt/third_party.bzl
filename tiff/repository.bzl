@@ -11,4 +11,9 @@ def tiff_repository():
         urls = [
             "https://download.osgeo.org/libtiff/tiff-4.2.0.tar.gz",
         ],
+        # Quick and dirty workaround: bazel will add the patch extern/tiff.
+        # This will expose libtiff's VERSION file that will conflict with
+        # C++20's own version header. Remove it.
+        patch_cmds = ["rm -f VERSION"],
+        patch_cmds_win = ["rm -Fo VERSION"],
     )
