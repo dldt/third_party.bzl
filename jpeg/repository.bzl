@@ -6,10 +6,9 @@ def jpeg_repository():
         http_archive,
         name = "jpeg",
         build_file = "@third_party//jpeg:package.BUILD",
-        sha256 = "240fd398da741669bf3c90366f58452ea59041cacc741a489b99f2f6a0bad052",
-        strip_prefix = "jpeg-9b",
+        sha256 = "017bdc33ff3a72e11301c0feb4657cb27719d7f97fa67a78ed506c594218bbf1",
+        strip_prefix = "libjpeg-turbo-2.0.6/",
         urls = [
-            "https://mirror.bazel.build/www.ijg.org/files/jpegsrc.v9b.tar.gz",
-            "http://www.ijg.org/files/jpegsrc.v9b.tar.gz",
+            "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.6.zip",
         ],
     )
