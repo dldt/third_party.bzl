@@ -1,40 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
-cc_library(
-    name = "tiff",
-    srcs = glob(
-        [
-            "libtiff/tif_*.c",
-        ],
-        exclude = [
-            "libtiff/tif_win32.c",
-            "libtiff/tif_wince.c",
-            "libtiff/tif_vms.c",
-        ],
-    ) + [
-        "libtiff/tif_stream.cxx",
-    ],
-    hdrs = glob([
-        "libtiff/*.h",
-    ]) + [
-        "libtiff/tif_config.h",
-        "libtiff/tiffconf.h",
-        "libtiff/tiffio.hxx",
-    ],
-    defines = [],
-    includes = [
-        "libtiff",
-    ],
-    linkopts = [],
-    visibility = ["//visibility:public"],
-    deps = [
-        "@jpeg",
-        "@webp",
-        "@lzma",
-        "@zlib",
-        "@zstd//:libzstd",
-    ],
-)
 
 genrule(
     name = "tiffconf_h",
@@ -238,4 +203,40 @@ genrule(
         "#define _DARWIN_USE_64_BIT_INODE 1",
         "EOF",
     ]),
+)
+
+cc_library(
+    name = "tiff",
+    srcs = glob(
+        [
+            "libtiff/tif_*.c",
+        ],
+        exclude = [
+            "libtiff/tif_win32.c",
+            "libtiff/tif_wince.c",
+            "libtiff/tif_vms.c",
+        ],
+    ) + [
+        "libtiff/tif_stream.cxx",
+    ],
+    hdrs = glob([
+        "libtiff/*.h",
+    ]) + [
+        "libtiff/tif_config.h",
+        "libtiff/tiffconf.h",
+        "libtiff/tiffio.hxx",
+    ],
+    defines = [],
+    includes = [
+        "libtiff",
+    ],
+    linkopts = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@jpeg",
+        "@webp",
+        "@lzma",
+        "@zlib",
+        "@zstd//:libzstd",
+    ],
 )
