@@ -1,5 +1,8 @@
 ## All platforms
 
+# Windows uses symlinks too
+startup --windows_enable_symlinks
+
 build --symlink_prefix=.bazel/ --experimental_no_product_name_out_symlink
 
 # Automatically bind platform related configuration
