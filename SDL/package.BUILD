@@ -39,6 +39,8 @@ SDL_SRCS = glob([
     "src/haptic/dummy/*.h",
     "src/hidapi/hidapi/*.c",
     "src/hidapi/hidapi/*.h",
+    "src/joystick/dummy/*.c",
+    "src/joystick/dummy/*.h",
     "src/joystick/hidapi/*.c",
     "src/joystick/hidapi/*.h",
     "src/joystick/virtual/*.c",
@@ -69,8 +71,6 @@ SDL_HEADERS = glob(
     ["include/*.h"],
     exclude = ["include/SDL_config.h"],
 ) + [":SDL_config_h"]
-
-SDL_DEFINES = ["USING_GENERATED_CONFIG_H"]
 
 copy_file(
     name = "SDL_config_h",
@@ -110,7 +110,6 @@ objc_library(
     ),
     hdrs = SDL_HEADERS,
     textual_hdrs = ["src/thread/generic/SDL_syssem.c"],
-    defines = SDL_DEFINES,
     includes = [
         "include/",
         "src/",
@@ -184,7 +183,6 @@ cc_library(
         ],
     ) + ["src/core/linux/SDL_ime.h"],
     hdrs = SDL_HEADERS,
-    defines = SDL_DEFINES,
     includes = [
         "include/",
         "src/",
@@ -217,8 +215,6 @@ cc_library(
             "src/loadso/windows/*.h",
             "src/locale/windows/*.c",
             "src/locale/windows/*.h",
-            "src/main/windows/*.c",
-            "src/main/windows/*.h",
             "src/misc/windows/*.c",
             "src/misc/windows/*.h",
             "src/power/windows/*.c",
@@ -239,7 +235,6 @@ cc_library(
         ],
     ),
     hdrs = SDL_HEADERS,
-    defines = SDL_DEFINES,
     includes = [
         "include/",
         "src/",
@@ -260,6 +255,18 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "SDL_main_windows",
+    srcs = ["src/main/windows/SDL_windows_main.c", "include/SDL_main.h"],
+    deps = [":SDL"],
+)
+
+cc_library(
+    name = "SDL_main_unix",
+    srcs = ["src/main/dummy/SDL_dummy_main.c", "include/SDL_main.h"],
+    deps = [":SDL"],
+)
+
 alias(
     name = "SDL",
     actual = select({
@@ -269,3 +276,14 @@ alias(
     }),
     visibility = ["//visibility:public"],
 )
+
+alias(
+    name = "SDL_main",
+    actual = select({
+        ":windows": ":SDL_main_windows",
+        ":linux": ":SDL_main_unix",
+        ":osx": "SDL_main_unix",
+    }),
+    visibility = ["//visibility:public"],
+)
+
