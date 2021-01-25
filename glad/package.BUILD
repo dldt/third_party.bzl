@@ -24,11 +24,12 @@ genrule(
 
 cc_library(
     name = "glad",
-    srcs = [":glad.c"],
+    srcs = [":glad.c", ":glad.h", ":khrplatform.h"],
     hdrs = [
         ":glad.h",
         ":khrplatform.h",
     ],
+    include_prefix = "glad/",
     includes = ["."],
     visibility = ["//visibility:public"],
 )
