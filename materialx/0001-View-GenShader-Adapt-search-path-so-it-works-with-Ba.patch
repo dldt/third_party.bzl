@@ -1,0 +1,50 @@
+From d92490bcd3db1c6c5a3761fec4d05568aa33878b Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Mon, 25 Jan 2021 08:44:58 +0100
+Subject: [PATCH] View GenShader: Adapt search path so it works with Bazel's
+ runtime files
+
+---
+ source/MaterialXGenShader/Util.cpp | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/source/MaterialXGenShader/Util.cpp b/source/MaterialXGenShader/Util.cpp
+index c7e61f1..30d3c8e 100644
+--- a/source/MaterialXGenShader/Util.cpp
++++ b/source/MaterialXGenShader/Util.cpp
+@@ -280,13 +280,31 @@ FileSearchPath getDefaultSearchPath()
+     FileSearchPath searchPath;
+ 
+     // Default search path for installed binaries.
++    // Bazel case, where the binary is run from the folder holding the runfiles.
++    FilePath bazelSearchPath = FilePath::getCurrentPath();
++    FilePath librariesSearchPath = bazelSearchPath / "extern/materialx/libraries";
++    if (librariesSearchPath.exists())
++    {
++        searchPath.append(librariesSearchPath.getParentPath());
++        searchPath.append(librariesSearchPath);
++    }
++    librariesSearchPath = bazelSearchPath / "libraries";
++    if (librariesSearchPath.exists())
++    {
++        searchPath.append(librariesSearchPath.getParentPath());
++        searchPath.append(librariesSearchPath);
++    }
++
++    // Standard case, where the binary is in a bin/ folder.
+     FilePath installSearchPath = FilePath::getModulePath().getParentPath();
+-    if (installSearchPath.exists())
++    librariesSearchPath = installSearchPath / "libraries";
++    if (librariesSearchPath.exists())
+     {
+         searchPath.append(installSearchPath);
+         searchPath.append(installSearchPath / "libraries");
+     }
+ 
++
+     // Default search path for development environments.
+     FilePath devSearchPath = FilePath(__FILE__).getParentPath().getParentPath().getParentPath();
+     if (devSearchPath.exists())
+-- 
+2.30.0.windows.2
+
