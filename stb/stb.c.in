@@ -1,0 +1,2 @@
+#define @STB_EMIT_DEFINITION@
+#include "@STB_HEADER@"
