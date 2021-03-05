@@ -143,6 +143,7 @@ cc_library(
         "lib/common/zstd_errors.h",
     ],
     includes = ["lib/common/"],
+    deps = [":zstd_headers"],
 )
 
 cc_library(
@@ -193,17 +194,17 @@ cc_library(
         "XXH_NAMESPACE=ZSTD_",
     ],
     includes = ["lib/common/"],
+    deps = [
+        ":zstd_headers",
+    ]
 )
 
 cc_library(
     name = "zstd_common",
-    srcs = ["lib/common/zstd_common.c"],
-    hdrs = [
-        "lib/common/zstd_internal.h",
-    ],
+    srcs = ["lib/common/zstd_common.c", "lib/common/zstd_trace.c"],
     includes = ["lib/common"],
     deps = [
-        "zstd_headers",
+        ":zstd_headers",
         ":compiler",
         ":errors",
         ":mem",

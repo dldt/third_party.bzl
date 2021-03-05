@@ -6,10 +6,10 @@ def openimageio_repository():
         http_archive,
         name = "openimageio",
         urls = [
-            "https://github.com/OpenImageIO/oiio/archive/v2.2.10.1.zip",
+            "https://github.com/OpenImageIO/oiio/archive/v2.2.12.0.zip",
         ],
-        sha256 = "9e061c69f78e6d7673be2a800a04dbed516722b99b93ed820bf5392379db482d",
-        strip_prefix = "oiio-2.2.10.1/",
+        sha256 = "2ef0d9a8951e4700e6440f984b42acfb5428be4af2964664ad3299dcdd943754",
+        strip_prefix = "oiio-2.2.12.0/",
         build_file = "@third_party//openimageio:package.BUILD",
         patches = ["@third_party//openimageio:0001-strutil-Use-external-fmtlib.patch"],
         patch_args = ["-p1"],

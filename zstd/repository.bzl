@@ -5,8 +5,8 @@ def zstd_repository():
     maybe(
         http_archive,
         name = "zstd",
-        urls = ["https://github.com/facebook/zstd/archive/v1.4.5.zip"],
-        sha256 = "b6c537b53356a3af3ca3e621457751fa9a6ba96daf3aebb3526ae0f610863532",
-        strip_prefix = "zstd-1.4.5",
+        urls = ["https://github.com/facebook/zstd/archive/v1.4.9.zip"],
+        sha256 = "bc74d2247f72584b9b010679089ee77136982d6f0e1eff28ca9d22c99185dcc6",
+        strip_prefix = "zstd-1.4.9",
         build_file = "@third_party//zstd:package.BUILD",
     )

@@ -6,9 +6,9 @@ def brigand_repository():
         http_archive,
         name = "brigand",
         urls = [
-            "https://github.com/edouarda/brigand/archive/cpp11-1.3.0.zip",
+            "https://github.com/edouarda/brigand/archive/1c398e4f1e817ab195e4cd6fbb03c18cb386eea3.zip",
         ],
-        sha256 = "abfc46cd99ff53a689bd817bd87365bb175782768adf7225a63057bb11885055",
-        strip_prefix = "brigand-cpp11-1.3.0/",
+        sha256 = "65922a73ceb924ec56b4050ac08903837ede5d477df21e63769b6e05ff545a28",
+        strip_prefix = "brigand-1c398e4f1e817ab195e4cd6fbb03c18cb386eea3/",
         build_file = "@third_party//brigand:package.BUILD",
     )

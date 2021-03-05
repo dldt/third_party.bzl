@@ -6,8 +6,8 @@ def boringssl_repository():
         http_archive,
         name = "boringssl",
         urls = [
-            "https://github.com/google/boringssl/archive/bdbe37905216bea8dd4d0fdee93f6ee415d3aa15.zip",
+            "https://github.com/google/boringssl/archive/ea41bed95b88fa23db9920b9930632cf9163472a.zip",
         ],
-        sha256 = "b2a7d159741008e61a1387ec6d93879539e8d7db055c769e4fefe9a371582e44",
-        strip_prefix = "boringssl-bdbe37905216bea8dd4d0fdee93f6ee415d3aa15/",
+        sha256 = "3a6d6c7486bbfbd6b8aca71e81b6b60b58799799e00b2e3d665a2fb2dd172b40",
+        strip_prefix = "boringssl-ea41bed95b88fa23db9920b9930632cf9163472a/",
     )

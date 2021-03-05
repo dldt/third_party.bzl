@@ -6,9 +6,9 @@ def argparse_repository():
         http_archive,
         name = "argparse",
         urls = [
-            "https://github.com/p-ranav/argparse/archive/535244d7b7fb8b8e2aa88464de98ef120eb4ff7f.zip",
+            "https://github.com/p-ranav/argparse/archive/9903a22904fed8176c4a1f69c4b691304b23c78e.zip",
         ],
-        sha256 = "ede0db99134b0cb37f0debaef4a2d8fc069b9d5be9159bf9a631e2a195d513f5",
-        strip_prefix = "argparse-535244d7b7fb8b8e2aa88464de98ef120eb4ff7f/",
+        sha256 = "09425b2b4f27c173343bc87ed89edf82aad3cdceccb0eaee4134d3673a12fdfa",
+        strip_prefix = "argparse-9903a22904fed8176c4a1f69c4b691304b23c78e/",
         build_file = "@third_party//argparse:package.BUILD",
     )

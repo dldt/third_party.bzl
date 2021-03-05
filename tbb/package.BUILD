@@ -21,20 +21,6 @@ config_setting(
     ],
 )
 
-genrule(
-    name = "generate_version_string.ver",
-    outs = ["version_string.ver"],
-    cmd_bash = select({
-        "linux": "sh $(location build/version_info_linux.sh) > $(@)",
-        "osx": "sh $(location build/version_info_macos.sh) > $(@)",
-        "//conditions:default": "",
-    }),
-    cmd_bat = "cscript.exe /nologo /E:jscript $(location build/version_info_windows.js) cl windows bazel > $(@)",
-    local = True,
-    toolchains = ["@bazel_tools//tools/cpp:current_cc_toolchain"],
-    tools = glob(["build/version_info_*"]),
-)
-
 cc_library(
     name = "tbb",
     srcs = glob(
@@ -57,7 +43,7 @@ cc_library(
         "//conditions:default": [],
     }),
     hdrs = glob([
-        "include/serial/**",
+        "include/oneapi/**",
         "include/tbb/**",
     ]),
     copts = select({
@@ -94,14 +80,10 @@ cc_library(
     }),
     local_defines = select({
         "windows": ["USE_WINTHREAD=1"],
-        "//conditions:default": [
-            "__TBB_BUILD=1",
-            "USE_PTHREAD",
-        ],  #, "DO_ITT_NOTIFY"],
-    }) + ["TBB_SUPPRESS_DEPRECATED_MESSAGES=1"],
+        "//conditions:default": ["USE_PTHREAD"],
+    }) + ["__TBB_BUILD=1","TBB_SUPPRESS_DEPRECATED_MESSAGES=1"],
     textual_hdrs = [
         "src/tbb/dynamic_link.cpp",
-        ":version_string.ver",
     ],
     visibility = ["//visibility:public"],
 )
