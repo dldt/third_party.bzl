@@ -1,0 +1,25 @@
+From 21cf54a925b556e7304c06266c95cd71ee56157a Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Thu, 11 Feb 2021 18:23:16 +0100
+Subject: [PATCH] use external nlohmann json
+
+---
+ tiny_gltf.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tiny_gltf.h b/tiny_gltf.h
+index 02030bc..43a9354 100644
+--- a/tiny_gltf.h
++++ b/tiny_gltf.h
+@@ -1536,7 +1536,7 @@ class TinyGLTF {
+ 
+ #ifndef TINYGLTF_NO_INCLUDE_JSON
+ #ifndef TINYGLTF_USE_RAPIDJSON
+-#include "json.hpp"
++#include "nlohmann/json.hpp"
+ #else
+ #include "document.h"
+ #include "prettywriter.h"
+-- 
+2.29.2
+
