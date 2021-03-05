@@ -6,8 +6,8 @@ def spirv_headers_repository():
         http_archive,
         name = "spirv-headers",
         urls = [
-            "https://github.com/KhronosGroup/SPIRV-Headers/archive/f027d53ded7e230e008d37c8b47ede7cd308e19d.zip",
+            "https://github.com/KhronosGroup/SPIRV-Headers/archive/19e951f3deba79b820a18b9088714dff2798a925.zip",
         ],
-        sha256 = "134a559f8bedb73c792415965a611b250fcb328de4576c922acf9a2679f746c4",
-        strip_prefix = "SPIRV-Headers-f027d53ded7e230e008d37c8b47ede7cd308e19d/",
+        sha256 = "32229886715f3ac48c77379ddfe782e8c74ba89a56d3fd34e8498504d57e0993",
+        strip_prefix = "SPIRV-Headers-19e951f3deba79b820a18b9088714dff2798a925/",
     )

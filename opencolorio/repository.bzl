@@ -6,9 +6,9 @@ def opencolorio_repository():
         http_archive,
         name = "opencolorio",
         build_file = "@third_party//opencolorio:package.BUILD",
-        sha256 = "215ba4df905ceb73c5896ebc507a36976b0df7248c7cceb3e3dc23077b385bdb",
-        strip_prefix = "OpenColorIO-2.0.0-rc1/",
+        sha256 = "c9611714c2309c13f08d1ffa9910c0c13b4c825cd46d1c9aba51d0f17488c64f",
+        strip_prefix = "OpenColorIO-2.0.0/",
         urls = [
-            "https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/v2.0.0-rc1.zip",
+            "https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/v2.0.0.zip",
         ],
     )

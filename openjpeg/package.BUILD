@@ -9,8 +9,9 @@ CMAKE_DEFINES = [
     # opjconfigprivate
     "OPJ_HAVE_INTTYPES_H=1",
     "PACKAGE_VERSION=2.4.0",
-    "OPJ_HAVE_MALLOC_H",
-    "OPJ_HAVE__ALIGNED_MALLOC",
+    "OPJ_HAVE__ALIGNED_MALLOC=1",
+    "OPJ_HAVE_MALLOC_H=1",
+    "OPJ_HAVE_STDINT_H=1",
 ]
 
 CMAKE_UNDEFS = [
@@ -59,8 +60,8 @@ cc_library(
     hdrs = glob([
         "src/lib/openjp2/*.h",
     ]) + [":opjconfigprivate", ":opjconfig"],
-    includes = [".", "src/lib/openjp2/"],
-    defines = ["OPJ_STATIC"],
+    includes = ["src/lib/openjp2/"],
+    # defines = ["OPJ_STATIC"],
     local_defines = ["USE_JPIP"],
     visibility = ["//visibility:public"],
 )

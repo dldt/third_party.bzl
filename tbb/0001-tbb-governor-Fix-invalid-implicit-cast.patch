@@ -1,0 +1,25 @@
+From ab73ea797eda5024ed41b7c42472bc2621a3f04f Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Thu, 4 Mar 2021 17:12:57 +0100
+Subject: [PATCH] tbb: [governor] Fix invalid implicit cast
+
+---
+ src/tbb/governor.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/tbb/governor.cpp b/src/tbb/governor.cpp
+index 87b44a88..381f5d23 100644
+--- a/src/tbb/governor.cpp
++++ b/src/tbb/governor.cpp
+@@ -131,7 +131,7 @@ static std::uintptr_t get_stack_base(std::size_t stack_size) {
+     suppress_unused_warning(stack_size);
+     NT_TIB* pteb = (NT_TIB*)NtCurrentTeb();
+     __TBB_ASSERT(&pteb < pteb->StackBase && &pteb > pteb->StackLimit, "invalid stack info in TEB");
+-    return pteb->StackBase;
++    return reinterpret_cast<uintptr_t>(pteb->StackBase);
+ #else /* USE_PTHREAD */
+     // There is no portable way to get stack base address in Posix, so we use
+     // non-portable method (on all modern Linux) or the simplified approach
+-- 
+2.30.1.windows.1
+

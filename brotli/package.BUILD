@@ -17,6 +17,9 @@ cc_library(
         "c/dec",
         "c/include",
     ],
+    deps = [
+        "@brotli_c_common_dictionary_bin//c/common/dictionary.bin",
+    ],
     linkopts = [],
     visibility = ["//visibility:public"],
 )

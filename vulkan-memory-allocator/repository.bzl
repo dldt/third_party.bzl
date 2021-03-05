@@ -6,9 +6,9 @@ def vulkan_memory_allocator_repository():
         http_archive,
         name = "vulkan-memory-allocator",
         urls = [
-            "https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/archive/8f4e09affd4b67c43e587870c54e20987e69abb3.zip",
+            "https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/archive/4b047fde545c2e1c82bdc1931f612a7e6b8611ba.zip",
         ],
-        sha256 = "33620be1c00f2f0149947ed5d73889b5f2b2cc8de7e96aea6c56af5f9cff3c3c",
-        strip_prefix = "VulkanMemoryAllocator-8f4e09affd4b67c43e587870c54e20987e69abb3/",
+        sha256 = "94f63cdafc6d077a0c5efb58f82de515728d2fc0ffd4b93947d6aa0eb4b6bdc7",
+        strip_prefix = "VulkanMemoryAllocator-4b047fde545c2e1c82bdc1931f612a7e6b8611ba/",
         build_file = "@third_party//vulkan-memory-allocator:package.BUILD",
     )

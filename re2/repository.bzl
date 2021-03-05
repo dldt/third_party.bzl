@@ -6,10 +6,10 @@ def re2_repository():
         http_archive,
         name = "re2",
         urls = [
-            "https://github.com/google/re2/archive/2020-11-01.zip",
+            "https://github.com/google/re2/archive/2021-02-02.zip",
         ],
-        sha256 = "b7a29e40083005d280136205a925a49a1cc2b22df7c2a5e3764c35d1c70f4441",
-        strip_prefix = "re2-2020-11-01/",
+        sha256 = "aa437441c4c33dd7a4081757e5bf56bef84c9654b88d5ab3a0489a008f39fed8",
+        strip_prefix = "re2-2021-02-02/",
         repo_mapping = {
             "@com_google_googletest": "@gtest",
         },

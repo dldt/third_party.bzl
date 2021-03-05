@@ -6,9 +6,9 @@ def vulkan_repository():
         http_archive,
         name = "vulkan",
         urls = [
-            "https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.2.162.zip",
+            "https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.2.170.zip",
         ],
-        sha256 = "5f4e1dd009f401d3936b5f3440c7f0d9b7ca40f217f3999e90e55cba1d397de3",
-        strip_prefix = "Vulkan-Headers-1.2.162/",
+        sha256 = "724a6b483b637f3e1243cef45463f4fd783a5b3f2b5bd39eb1e9da18a3f249e6",
+        strip_prefix = "Vulkan-Headers-1.2.170/",
         build_file = "@third_party//vulkan:package.BUILD",
     )

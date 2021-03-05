@@ -1,0 +1,27 @@
+From cc7d2b10a70d5e0cc269613011db7340ebe402f3 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 6 Mar 2021 06:11:01 +0100
+Subject: [PATCH 1/4] Works around Visual Studio compiler issue with
+ /std:c++latest
+
+https://developercommunity.visualstudio.com/t/std:clatest-c20-breaks-attached-te/1359606
+---
+ glm/detail/setup.hpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glm/detail/setup.hpp b/glm/detail/setup.hpp
+index a6bfec8a..51ab3f86 100644
+--- a/glm/detail/setup.hpp
++++ b/glm/detail/setup.hpp
+@@ -601,7 +601,7 @@ namespace glm
+ 	namespace glm
+ 	{
+ 		template<typename T, std::size_t N>
+-		constexpr std::size_t countof(T const (&)[N])
++		constexpr std::size_t countof(T const (&array)[N])
+ 		{
+ 			return N;
+ 		}
+-- 
+2.30.1.windows.1
+

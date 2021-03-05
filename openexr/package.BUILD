@@ -34,7 +34,7 @@ CMAKE_DEFINES = [
     "ILMBASE_IEX_NAMESPACE=Iex",
     "ILMBASE_ILMTHREAD_NAMESPACE=IlmThread",
     "ILMBASE_VERSION=2.5.4",
-    "ILMBASE_PACKAGE_NAME=IlmBase 2.5.4",
+    "ILMBASE_PACKAGE_NAME=IlmBase 2.5.5",
     "ILMBASE_VERSION_MAJOR=2",
     "ILMBASE_VERSION_MINOR=5",
     "ILMBASE_VERSION_PATCH=4",
@@ -54,11 +54,11 @@ CMAKE_DEFINES = [
     "OPENEXR_NAMESPACE_CUSTOM=1",
     "OPENEXR_INTERNAL_IMF_NAMESPACE=Imf_2_5",
     "OPENEXR_IMF_NAMESPACE=Imf",
-    "OPENEXR_VERSION=2.5.4",
-    "OPENEXR_PACKAGE_NAME=Imf 2.5.4",
+    "OPENEXR_VERSION=2.5.5",
+    "OPENEXR_PACKAGE_NAME=Imf 2.5.5",
     "OPENEXR_VERSION_MAJOR=2",
     "OPENEXR_VERSION_MINOR=5",
-    "OPENEXR_VERSION_PATCH=4",
+    "OPENEXR_VERSION_PATCH=5",
 ] + [
     # OpenEXRInternal config
     "OPENEXR_IMF_HAVE_COMPLETE_IOMANIP=1",
@@ -125,9 +125,8 @@ cc_library(
 cc_library(
     name = "half",
     srcs = glob([
-        "IlmBase/Half/*.cpp",
         "IlmBase/Half/*.h",
-    ]),
+    ]) + ["IlmBase/Half/half.cpp"],
     hdrs = glob([
         "IlmBase/Half/*.h",
     ]),
@@ -169,7 +168,7 @@ cc_library(
     includes = [
         "IlmBase/Iex/",
         "IlmBase/Imath/",
-        "IlmBase/half",
+        "IlmBase/Half/",
     ],
     strip_include_prefix = "IlmBase/Imath/",
     visibility = ["//visibility:public"],
@@ -251,15 +250,21 @@ cc_library(
     ],
     defines = DEFINES,
     include_prefix = "OpenEXR/",
+    includes = [".", "OpenEXR/"],
 )
 
 cc_library(
     name = "IlmImf",
     srcs = glob([
         "OpenEXR/IlmImf/*.cpp",
+        "OpenEXR/IlmImf/*.h",
+        "IlmBase/Half/*.h",
         "IlmBase/Iex/*.h",
         "IlmBase/Imath/*.h",
         "IlmBase/IlmThread/*.h",
+    ], exclude = [
+        "OpenEXR/IlmImf/dwaLookups.cpp",
+        "OpenEXR/IlmImf/b44ExpLogTable.cpp",
     ]) + [
         ":openexr_config",
         ":openexr_config_internal",
@@ -273,6 +278,7 @@ cc_library(
         "IlmBase/Iex/",
         "IlmBase/IlmThread/",
         "IlmBase/Imath",
+        "OpenEXR/",
         "OpenEXR/IlmImf/",
     ],
     strip_include_prefix = "OpenEXR/IlmImf/",

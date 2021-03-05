@@ -1,0 +1,35 @@
+From 82ed15f6bb28c0a34aa605234ede9a7c6c8c864b Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Fri, 5 Mar 2021 14:42:15 +0100
+Subject: [PATCH] small_vector: Fix C++20 comparison operator issue
+
+---
+ source/util/small_vector.h | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/source/util/small_vector.h b/source/util/small_vector.h
+index f2c1147b..e1110915 100644
+--- a/source/util/small_vector.h
++++ b/source/util/small_vector.h
+@@ -175,18 +175,10 @@ class SmallVector {
+     return true;
+   }
+ 
+-  friend bool operator==(const std::vector<T>& lhs, const SmallVector& rhs) {
+-    return rhs == lhs;
+-  }
+-
+   friend bool operator!=(const SmallVector& lhs, const std::vector<T>& rhs) {
+     return !(lhs == rhs);
+   }
+ 
+-  friend bool operator!=(const std::vector<T>& lhs, const SmallVector& rhs) {
+-    return rhs != lhs;
+-  }
+-
+   T& operator[](size_t i) {
+     if (!large_data_) {
+       return small_data_[i];
+-- 
+2.30.1.windows.1
+

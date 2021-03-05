@@ -29,7 +29,7 @@ cc_library(
     ) + [":nanogui_resources.c"],
     hdrs = glob(["include/**/*.h"]) + [":nanogui_resources.h"],
     defines = ["NANOGUI_GLAD"],
-    includes = ["include/"],
+    includes = [".", "include/"],
     visibility = ["//visibility:public"],
     deps = [
         "@eigen",

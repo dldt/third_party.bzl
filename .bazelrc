@@ -1,9 +1,16 @@
-## All platforms
+### All platforms
 
-# Windows uses symlinks too
+## Startup options
+
+# Enable symlinks on Windows
 startup --windows_enable_symlinks
 
+# Make sure build hierarchy is rooted under .bazel. It simplifies ignoring files
+# with bazel, vscode and others
 build --symlink_prefix=.bazel/ --experimental_no_product_name_out_symlink
+
+
+## Build
 
 # Automatically bind platform related configuration
 build --enable_platform_specific_config
@@ -12,13 +19,15 @@ build --enable_platform_specific_config
 build --fission=yes
 
 ## Windows specific
+# Visual Studio version to use
+build:windows --action_env=BAZEL_VS="C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/"
 # Go for C++20 compliance
 build:windows --cxxopt="/std:c++latest" --host_cxxopt="/std:c++latest"
 build:windows --cxxopt="/permissive-" --host_cxxopt="/permissive-"
 # This one is required for C++20 compliance and for ranges-v3 to work
 build:windows --cxxopt="/Zc:preprocessor" --host_cxxopt="/Zc:preprocessor"
 # Make sure runfiles are accessible on Windows
-build:windows --experimental_enable_runfiles
+build:windows --enable_runfiles
 # Disable a few warnings with Microsoft headers
 build:windows --cxxopt="/wd5105" --host_cxxopt="/wd5105"
 
@@ -27,7 +36,8 @@ build:clang-cl --config=windows
 build:clang-cl --action_env="USE_CLANG_CL=1"
 
 ## Unix generic
-build:unix --cxxopt="-std=gnu++2a" --host_cxxopt="-std=gnu++2a" --action_env="CCACHE_DISABLE=1"
+build:unix --cxxopt="-std=gnu++2a" --host_cxxopt="-std=gnu++2a"
+build:unix --action_env="CCACHE_DISABLE=1" --host_action_env="CCACHE_DISABLE=1"
 
 ## Linux specific
 build:linux --config=unix

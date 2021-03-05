@@ -118,6 +118,7 @@ cc_library(
     ],
     copts = libjpegturbo_copts,
     visibility = ["//visibility:public"],
+    includes = ["."],
     deps = select({
         ":k8": [":simd_x86_64"],
         ":armeabi-v7a": [":simd_armv7a"],
