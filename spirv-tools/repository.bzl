@@ -16,6 +16,9 @@ def spirv_tools_repository():
             "@com_google_googletest": "@gtest",
             "@com_googlesource_code_re2": "@re2",
         },
-        patches = ["@third_party//spirv-tools:0001-small_vector-Fix-C-20-comparison-operator-issue.patch"],
+        patches = [
+            "@third_party//spirv-tools:0001-small_vector-Fix-C-20-comparison-operator-issue.patch",
+            "@third_party//spirv-tools:0002-Workaround-warning-as-error.patch"
+        ],
         patch_args = ["-p1"],
     )
