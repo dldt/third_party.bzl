@@ -58,6 +58,7 @@ cc_library(
             "-fPIC",
             "-flifetime-dse=1",
             "-mrtm",
+            "-mwaitpkg",
         ],
     }),
     defines = ["__TBB_NO_IMPLICIT_LINKAGE"],
