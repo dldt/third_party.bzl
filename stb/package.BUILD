@@ -53,6 +53,10 @@ stb_library(
         ],
     }),
     emit_definition_macro = "STB_DEFINE",
+    defines = select({
+        ":linux": ["_DEFAULT_SOURCE"],
+        "//conditions:default": [],
+    }),
     stb_prefix = False,
 )
 

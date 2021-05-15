@@ -26,6 +26,8 @@ build:windows --cxxopt="/std:c++latest" --host_cxxopt="/std:c++latest"
 build:windows --cxxopt="/permissive-" --host_cxxopt="/permissive-"
 # This one is required for C++20 compliance and for ranges-v3 to work
 build:windows --cxxopt="/Zc:preprocessor" --host_cxxopt="/Zc:preprocessor"
+# Make sure __cplusplus is correctly defined
+build:windows --cxxopt="/Zc:__cplusplus" --host_cxxopt="/Zc:__cplusplus"
 # Make sure runfiles are accessible on Windows
 build:windows --enable_runfiles
 # Disable a few warnings with Microsoft headers

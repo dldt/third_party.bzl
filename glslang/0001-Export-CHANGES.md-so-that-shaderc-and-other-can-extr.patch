@@ -1,0 +1,26 @@
+From 52f76ecf23f77138c3cf4d2293d1a04b72ea034f Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 15 May 2021 08:27:44 +0200
+Subject: [PATCH] Export CHANGES.md so that shaderc and other can extracct
+ version information
+
+---
+ BUILD.bazel | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/BUILD.bazel b/BUILD.bazel
+index e8cf6a86..278b8779 100644
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -41,7 +41,7 @@ package(
+ 
+ licenses(["notice"])
+ 
+-exports_files(["LICENSE"])
++exports_files(["LICENSE", "CHANGES.md"])
+ 
+ # Build information generation script
+ py_binary(
+-- 
+2.31.1.windows.1
+

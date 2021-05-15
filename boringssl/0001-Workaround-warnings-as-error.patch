@@ -1,0 +1,27 @@
+From 73bf1c0f32ae50c85721c56825dde3b9ce706523 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 15 May 2021 17:44:59 +0200
+Subject: [PATCH] Workaround warnings as error
+
+---
+ BUILD | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/BUILD b/BUILD
+index 65e0cdc2e..a115f00ee 100644
+--- a/BUILD
++++ b/BUILD
+@@ -106,6 +106,10 @@ posix_copts = [
+     # operations for reference counting rather than locks. However, it's
+     # known not to work on some Android builds.
+     # "-DOPENSSL_C11_ATOMIC",
++
++
++    # Disable warnings that breaks compilation
++    "-Wno-array-parameter",
+ ]
+ 
+ boringssl_copts = select({
+-- 
+2.31.1
+

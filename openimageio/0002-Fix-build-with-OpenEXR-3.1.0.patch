@@ -1,0 +1,206 @@
+From 242e56a9fa372d4091cb08f98da757a51b9ee98d Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 15 May 2021 11:03:03 +0200
+Subject: [PATCH] Fix build with OpenEXR 3.1.0
+
+---
+ src/dpx.imageio/dpxinput.cpp      |  2 +-
+ src/oiiotool/oiiotool.cpp         |  2 +-
+ src/openexr.imageio/exrinput.cpp  | 62 +++++++++++++++----------------
+ src/openexr.imageio/exroutput.cpp | 60 +++++++++++++++---------------
+ 4 files changed, 63 insertions(+), 63 deletions(-)
+
+diff --git a/src/dpx.imageio/dpxinput.cpp b/src/dpx.imageio/dpxinput.cpp
+index 673e59e6..a4ab7b90 100644
+--- a/src/dpx.imageio/dpxinput.cpp
++++ b/src/dpx.imageio/dpxinput.cpp
+@@ -6,7 +6,7 @@
+ #include <iomanip>
+ #include <memory>
+ 
+-#include <OpenEXR/ImfTimeCode.h>  //For TimeCode support
++#include <ImfTimeCode.h>  //For TimeCode support
+ 
+ // Note: libdpx originally from: https://github.com/PatrickPalmer/dpx
+ // But that seems not to be actively maintained.
+diff --git a/src/oiiotool/oiiotool.cpp b/src/oiiotool/oiiotool.cpp
+index 4340b34b..67a309a8 100644
+--- a/src/oiiotool/oiiotool.cpp
++++ b/src/oiiotool/oiiotool.cpp
+@@ -16,7 +16,7 @@
+ #include <utility>
+ #include <vector>
+ 
+-#include <OpenEXR/ImfTimeCode.h>
++#include <ImfTimeCode.h>
+ 
+ #include <OpenImageIO/argparse.h>
+ #include <OpenImageIO/color.h>
+diff --git a/src/openexr.imageio/exrinput.cpp b/src/openexr.imageio/exrinput.cpp
+index 4b45b928..3607b6f3 100644
+--- a/src/openexr.imageio/exrinput.cpp
++++ b/src/openexr.imageio/exrinput.cpp
+@@ -22,11 +22,11 @@ using boost::math::gcd;
+ 
+ #include <OpenImageIO/platform.h>
+ 
+-#include <OpenEXR/ImfChannelList.h>
+-#include <OpenEXR/ImfEnvmap.h>
+-#include <OpenEXR/ImfInputFile.h>
+-#include <OpenEXR/ImfTestFile.h>
+-#include <OpenEXR/ImfTiledInputFile.h>
++#include <ImfChannelList.h>
++#include <ImfEnvmap.h>
++#include <ImfInputFile.h>
++#include <ImfTestFile.h>
++#include <ImfTiledInputFile.h>
+ 
+ #ifdef OPENEXR_VERSION_MAJOR
+ #    define OPENEXR_CODED_VERSION                                    \
+@@ -48,37 +48,37 @@ using boost::math::gcd;
+ OIIO_PRAGMA_VISIBILITY_PUSH
+ OIIO_PRAGMA_WARNING_PUSH
+ OIIO_GCC_PRAGMA(GCC diagnostic ignored "-Wunused-parameter")
+-#include <OpenEXR/IexBaseExc.h>
+-#include <OpenEXR/IexThrowErrnoExc.h>
+-#include <OpenEXR/ImfBoxAttribute.h>
+-#include <OpenEXR/ImfChromaticitiesAttribute.h>
+-#include <OpenEXR/ImfCompressionAttribute.h>
+-#include <OpenEXR/ImfDeepFrameBuffer.h>
+-#include <OpenEXR/ImfDeepScanLineInputPart.h>
+-#include <OpenEXR/ImfDeepTiledInputPart.h>
+-#include <OpenEXR/ImfDoubleAttribute.h>
+-#include <OpenEXR/ImfEnvmapAttribute.h>
+-#include <OpenEXR/ImfFloatAttribute.h>
+-#include <OpenEXR/ImfHeader.h>
++#include <IexBaseExc.h>
++#include <IexThrowErrnoExc.h>
++#include <ImfBoxAttribute.h>
++#include <ImfChromaticitiesAttribute.h>
++#include <ImfCompressionAttribute.h>
++#include <ImfDeepFrameBuffer.h>
++#include <ImfDeepScanLineInputPart.h>
++#include <ImfDeepTiledInputPart.h>
++#include <ImfDoubleAttribute.h>
++#include <ImfEnvmapAttribute.h>
++#include <ImfFloatAttribute.h>
++#include <ImfHeader.h>
+ #if OPENEXR_HAS_FLOATVECTOR
+-#    include <OpenEXR/ImfFloatVectorAttribute.h>
++#    include <ImfFloatVectorAttribute.h>
+ #endif
+-#include <OpenEXR/ImfInputPart.h>
+-#include <OpenEXR/ImfIntAttribute.h>
+-#include <OpenEXR/ImfKeyCodeAttribute.h>
+-#include <OpenEXR/ImfMatrixAttribute.h>
+-#include <OpenEXR/ImfMultiPartInputFile.h>
+-#include <OpenEXR/ImfPartType.h>
+-#include <OpenEXR/ImfRationalAttribute.h>
+-#include <OpenEXR/ImfStringAttribute.h>
+-#include <OpenEXR/ImfStringVectorAttribute.h>
+-#include <OpenEXR/ImfTiledInputPart.h>
+-#include <OpenEXR/ImfTimeCodeAttribute.h>
+-#include <OpenEXR/ImfVecAttribute.h>
++#include <ImfInputPart.h>
++#include <ImfIntAttribute.h>
++#include <ImfKeyCodeAttribute.h>
++#include <ImfMatrixAttribute.h>
++#include <ImfMultiPartInputFile.h>
++#include <ImfPartType.h>
++#include <ImfRationalAttribute.h>
++#include <ImfStringAttribute.h>
++#include <ImfStringVectorAttribute.h>
++#include <ImfTiledInputPart.h>
++#include <ImfTimeCodeAttribute.h>
++#include <ImfVecAttribute.h>
+ OIIO_PRAGMA_WARNING_POP
+ OIIO_PRAGMA_VISIBILITY_POP
+ 
+-#include <OpenEXR/ImfCRgbaFile.h>
++#include <ImfCRgbaFile.h>
+ 
+ #include "imageio_pvt.h"
+ #include <OpenImageIO/dassert.h>
+diff --git a/src/openexr.imageio/exroutput.cpp b/src/openexr.imageio/exroutput.cpp
+index 122d02a8..31bd8a24 100644
+--- a/src/openexr.imageio/exroutput.cpp
++++ b/src/openexr.imageio/exroutput.cpp
+@@ -13,10 +13,10 @@
+ 
+ #include <OpenImageIO/platform.h>
+ 
+-#include <OpenEXR/ImfChannelList.h>
+-#include <OpenEXR/ImfEnvmap.h>
+-#include <OpenEXR/ImfOutputFile.h>
+-#include <OpenEXR/ImfTiledOutputFile.h>
++#include <ImfChannelList.h>
++#include <ImfEnvmap.h>
++#include <ImfOutputFile.h>
++#include <ImfTiledOutputFile.h>
+ 
+ #ifdef OPENEXR_VERSION_MAJOR
+ #    define OPENEXR_CODED_VERSION                                    \
+@@ -38,34 +38,34 @@
+ OIIO_PRAGMA_VISIBILITY_PUSH
+ OIIO_PRAGMA_WARNING_PUSH
+ OIIO_GCC_PRAGMA(GCC diagnostic ignored "-Wunused-parameter")
+-#include <OpenEXR/IexBaseExc.h>
+-#include <OpenEXR/ImfBoxAttribute.h>
+-#include <OpenEXR/ImfCRgbaFile.h>  // JUST to get symbols to figure out version!
+-#include <OpenEXR/ImfChromaticitiesAttribute.h>
+-#include <OpenEXR/ImfCompressionAttribute.h>
+-#include <OpenEXR/ImfEnvmapAttribute.h>
+-#include <OpenEXR/ImfFloatAttribute.h>
++#include <IexBaseExc.h>
++#include <ImfBoxAttribute.h>
++#include <ImfCRgbaFile.h>  // JUST to get symbols to figure out version!
++#include <ImfChromaticitiesAttribute.h>
++#include <ImfCompressionAttribute.h>
++#include <ImfEnvmapAttribute.h>
++#include <ImfFloatAttribute.h>
+ #if OPENEXR_HAS_FLOATVECTOR
+-#    include <OpenEXR/ImfFloatVectorAttribute.h>
++#    include <ImfFloatVectorAttribute.h>
+ #endif
+-#include <OpenEXR/ImfHeader.h>
+-#include <OpenEXR/ImfIntAttribute.h>
+-#include <OpenEXR/ImfKeyCodeAttribute.h>
+-#include <OpenEXR/ImfMatrixAttribute.h>
+-#include <OpenEXR/ImfRationalAttribute.h>
+-#include <OpenEXR/ImfStringAttribute.h>
+-#include <OpenEXR/ImfTimeCodeAttribute.h>
+-#include <OpenEXR/ImfVecAttribute.h>
+-
+-#include <OpenEXR/ImfDeepFrameBuffer.h>
+-#include <OpenEXR/ImfDeepScanLineOutputPart.h>
+-#include <OpenEXR/ImfDeepTiledOutputPart.h>
+-#include <OpenEXR/ImfDoubleAttribute.h>
+-#include <OpenEXR/ImfMultiPartOutputFile.h>
+-#include <OpenEXR/ImfOutputPart.h>
+-#include <OpenEXR/ImfPartType.h>
+-#include <OpenEXR/ImfStringVectorAttribute.h>
+-#include <OpenEXR/ImfTiledOutputPart.h>
++#include <ImfHeader.h>
++#include <ImfIntAttribute.h>
++#include <ImfKeyCodeAttribute.h>
++#include <ImfMatrixAttribute.h>
++#include <ImfRationalAttribute.h>
++#include <ImfStringAttribute.h>
++#include <ImfTimeCodeAttribute.h>
++#include <ImfVecAttribute.h>
++
++#include <ImfDeepFrameBuffer.h>
++#include <ImfDeepScanLineOutputPart.h>
++#include <ImfDeepTiledOutputPart.h>
++#include <ImfDoubleAttribute.h>
++#include <ImfMultiPartOutputFile.h>
++#include <ImfOutputPart.h>
++#include <ImfPartType.h>
++#include <ImfStringVectorAttribute.h>
++#include <ImfTiledOutputPart.h>
+ OIIO_PRAGMA_WARNING_POP
+ OIIO_PRAGMA_VISIBILITY_POP
+ 
+-- 
+2.31.1.windows.1
+
