@@ -16,11 +16,20 @@ template_rule(
         "@CMAKE_CXX_STANDARD@": "20",
         "@PROJECT_VERSION_MAJOR@": "2",
         "@PROJECT_VERSION_MINOR@": "2",
-        "@PROJECT_VERSION_PATCH@": "12",
+        "@PROJECT_VERSION_PATCH@": "14",
         "@PROJECT_VERSION_TWEAK@": "0",
         "@PROJECT_VERSION_RELEASE_TYPE@": "",
         "@PROJ_NAME@": "OIIO",
         "@PROJ_NAMESPACE_V@": "OIIO_2_2",
+    },
+)
+
+template_rule(
+    name = "oiioimath",
+    src = "src/include/OpenImageIO/Imath.h.in",
+    out = "src/include/OpenImageIO/Imath.h",
+    substitutions = {
+        "@OIIO_USING_IMATH@": "3",
     },
 )
 
@@ -67,6 +76,7 @@ cc_library(
         "src/include/OpenImageIO/detail/**",
     ]) + [
         ":oiioversion",
+        ":oiioimath",
         ":imageiopvt",
     ],
     includes = [
@@ -76,6 +86,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     local_defines = ["EMBED_PLUGINS"],
+    defines = ["OIIO_STATIC_DEFINE"],
     deps = [
         "@boost//:algorithm",
         "@boost//:container",
@@ -87,8 +98,9 @@ cc_library(
         "@boost//:throw_exception",
         "@boost//:tokenizer",
         "@fmt",
+        "@Imath",
         "@jpeg",
-        "@openexr//:IlmImf",
+        "@openexr//:OpenEXR",
         "@openjpeg//:openjp2",
         "@png",
         "@robin-map",

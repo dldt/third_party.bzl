@@ -1,11 +1,15 @@
 # Description:
 #   libjpeg-turbo is a drop in replacement for jpeglib optimized with SIMD.
 
-load("@rules_cc//cc:defs.bzl", "cc_library")
+licenses(["notice"])  # custom notice-style license, see LICENSE.md
+
+exports_files(["LICENSE.md"])
+
 load("@third_party//:defs.bzl", "template_rule")
 
 WIN_COPTS = [
     "/Ox",
+    "-DWITH_SIMD",
     "-wd4996",
 ]
 
@@ -15,9 +19,7 @@ libjpegturbo_copts = select({
         "-fPIE",
         "-w",
     ],
-    ":windows": [
-        "-DWITH_SIMD",
-    ],
+    ":windows": WIN_COPTS,
     "//conditions:default": [
         "-O3",
         "-w",
@@ -104,6 +106,7 @@ cc_library(
         "jutils.c",
         "jversion.h",
     ],
+    includes = ["."],
     hdrs = [
         "jccolext.c",  # should have been named .inc
         "jdcol565.c",  # should have been named .inc
@@ -118,7 +121,6 @@ cc_library(
     ],
     copts = libjpegturbo_copts,
     visibility = ["//visibility:public"],
-    includes = ["."],
     deps = select({
         ":k8": [":simd_x86_64"],
         ":armeabi-v7a": [":simd_armv7a"],
@@ -257,7 +259,6 @@ genrule(
         "simd/x86_64/jsimdcpu.asm",
         "simd/nasm/jcolsamp.inc",
         "simd/nasm/jdct.inc",
-        "simd/nasm/jpeg_nbits_table.inc",
         "simd/nasm/jsimdcfg.inc",
         "simd/nasm/jsimdcfg.inc.h",
         "simd/nasm/jsimdext.inc",
@@ -309,6 +310,7 @@ cc_library(
     srcs = [
         "jchuff.h",
         "jconfig.h",
+        "jconfigint.h",
         "jdct.h",
         "jerror.h",
         "jinclude.h",
@@ -317,8 +319,8 @@ cc_library(
         "jpeglib.h",
         "jsimd.h",
         "jsimddct.h",
-        "simd/arm/jsimd.c",
-        "simd/arm/jsimd_neon.S",
+        "simd/arm/aarch32/jsimd.c",
+        "simd/arm/aarch32/jsimd_neon.S",
         "simd/jsimd.h",
     ],
     copts = libjpegturbo_copts,
@@ -329,6 +331,7 @@ cc_library(
     srcs = [
         "jchuff.h",
         "jconfig.h",
+        "jconfigint.h",
         "jdct.h",
         "jerror.h",
         "jinclude.h",
@@ -337,8 +340,8 @@ cc_library(
         "jpeglib.h",
         "jsimd.h",
         "jsimddct.h",
-        "simd/arm64/jsimd.c",
-        "simd/arm64/jsimd_neon.S",
+        "simd/arm/aarch64/jsimd.c",
+        "simd/arm/aarch64/jsimd_neon.S",
         "simd/jsimd.h",
     ],
     copts = libjpegturbo_copts,
@@ -433,7 +436,6 @@ genrule(
         "simd/x86_64/jsimdcpu.asm",
         "simd/nasm/jcolsamp.inc",
         "simd/nasm/jdct.inc",
-        "simd/nasm/jpeg_nbits_table.inc",
         "simd/nasm/jsimdcfg.inc",
         "simd/nasm/jsimdcfg.inc.h",
         "simd/nasm/jsimdext.inc",

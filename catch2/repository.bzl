@@ -6,9 +6,9 @@ def catch2_repository():
         http_archive,
         name = "catch2",
         urls = [
-            "https://github.com/catchorg/Catch2/archive/v2.13.4.zip",
+            "https://github.com/catchorg/Catch2/archive/v2.13.6.zip",
         ],
-        sha256 = "f9f957db59e29b099f9eb10f9dcec1bbdbc6da07b9dd8b6b3149ed6a57f986da",
-        strip_prefix = "Catch2-2.13.4/",
+        sha256 = "39d50f5d1819cdf2908066664d57c2cde4a4000c364ad3376ea099735c896ff4",
+        strip_prefix = "Catch2-2.13.6/",
         build_file = "@third_party//catch2:package.BUILD",
     )

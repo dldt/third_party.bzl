@@ -1,0 +1,155 @@
+From 95f1b3045b8fc5acbdbbe334625709137836a13f Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 15 May 2021 11:50:09 +0200
+Subject: [PATCH] Backport invoke_result
+
+---
+ Eigen/src/Core/util/Macros.h | 11 ++++-
+ Eigen/src/Core/util/Meta.h   | 88 +++++++++++++++++++++++++++++++++---
+ 2 files changed, 92 insertions(+), 7 deletions(-)
+
+diff --git a/Eigen/src/Core/util/Macros.h b/Eigen/src/Core/util/Macros.h
+index 6b0399ebc..87fe5892c 100644
+--- a/Eigen/src/Core/util/Macros.h
++++ b/Eigen/src/Core/util/Macros.h
+@@ -390,13 +390,22 @@
+ 
+ // Does the compiler support result_of?
+ #ifndef EIGEN_HAS_STD_RESULT_OF
+-#if EIGEN_MAX_CPP_VER>=11 && ((__has_feature(cxx_lambdas) || (defined(__cplusplus) && __cplusplus >= 201103L)))
++#if EIGEN_MAX_CPP_VER>=11 && (defined(__cplusplus) && __cplusplus >= 201103L && __cplusplus < 201703L)
+ #define EIGEN_HAS_STD_RESULT_OF 1
+ #else
+ #define EIGEN_HAS_STD_RESULT_OF 0
+ #endif
+ #endif
+ 
++#ifndef EIGEN_HAS_STD_INVOKE_RESULT
++#if EIGEN_MAX_CPP_VER >= 17 && \
++    (defined(__cplusplus) && __cplusplus >= 201703L)
++#define EIGEN_HAS_STD_INVOKE_RESULT 1
++#else
++#define EIGEN_HAS_STD_INVOKE_RESULT 0
++#endif
++#endif
++
+ // Does the compiler support type_traits?
+ // - full support of type traits was added only to GCC 5.1.0.
+ // - 20150626 corresponds to the last release of 4.x libstdc++
+diff --git a/Eigen/src/Core/util/Meta.h b/Eigen/src/Core/util/Meta.h
+index 9b61ff037..abf12d848 100755
+--- a/Eigen/src/Core/util/Meta.h
++++ b/Eigen/src/Core/util/Meta.h
+@@ -309,13 +309,29 @@ protected:
+ };
+ 
+ /** \internal
+-  * Convenient struct to get the result type of a unary or binary functor.
+-  *
+-  * It supports both the current STL mechanism (using the result_type member) as well as
+-  * upcoming next STL generation (using a templated result member).
+-  * If none of these members is provided, then the type of the first argument is returned. FIXME, that behavior is a pretty bad hack.
++  * Convenient struct to get the result type of a nullary, unary, binary, or
++  * ternary functor.
++  * 
++  * Pre C++11:
++  * Supports both a Func::result_type member and templated
++  * Func::result<Func(ArgTypes...)>::type member.
++  * 
++  * If none of these members is provided, then the type of the first
++  * argument is returned.
++  * 
++  * Post C++11:
++  * This uses std::result_of. However, note the `type` member removes
++  * const and converts references/pointers to their corresponding value type.
+   */
+-#if EIGEN_HAS_STD_RESULT_OF
++#if EIGEN_HAS_STD_INVOKE_RESULT
++template<typename T> struct result_of;
++
++template<typename F, typename... ArgTypes>
++struct result_of<F(ArgTypes...)> {
++  typedef typename std::invoke_result<F, ArgTypes...>::type type1;
++  typedef typename remove_all<type1>::type type;
++};
++#elif EIGEN_HAS_STD_RESULT_OF
+ template<typename T> struct result_of {
+   typedef typename std::result_of<T>::type type1;
+   typedef typename remove_all<type1>::type type;
+@@ -327,6 +343,29 @@ struct has_none {int a[1];};
+ struct has_std_result_type {int a[2];};
+ struct has_tr1_result {int a[3];};
+ 
++template<typename Func, int SizeOf>
++struct nullary_result_of_select {};
++
++template<typename Func>
++struct nullary_result_of_select<Func, sizeof(has_std_result_type)> {typedef typename Func::result_type type;};
++
++template<typename Func>
++struct nullary_result_of_select<Func, sizeof(has_tr1_result)> {typedef typename Func::template result<Func()>::type type;};
++
++template<typename Func>
++struct result_of<Func()> {
++    template<typename T>
++    static has_std_result_type    testFunctor(T const *, typename T::result_type const * = 0);
++    template<typename T>
++    static has_tr1_result         testFunctor(T const *, typename T::template result<T()>::type const * = 0);
++    static has_none               testFunctor(...);
++
++    // note that the following indirection is needed for gcc-3.3
++    enum {FunctorType = sizeof(testFunctor(static_cast<Func*>(0)))};
++    typedef typename nullary_result_of_select<Func, FunctorType>::type type;
++};
++
++
+ template<typename Func, typename ArgType, int SizeOf=sizeof(has_none)>
+ struct unary_result_of_select {typedef typename internal::remove_all<ArgType>::type type;};
+ 
+@@ -398,6 +437,43 @@ struct result_of<Func(ArgType0,ArgType1,ArgType2)> {
+ };
+ #endif
+ 
++#if EIGEN_HAS_STD_INVOKE_RESULT
++template<typename F, typename... ArgTypes>
++struct invoke_result {
++  typedef typename std::invoke_result<F, ArgTypes...>::type type1;
++  typedef typename remove_all<type1>::type type;
++};
++#elif EIGEN_HAS_CXX11
++template<typename F, typename... ArgTypes>
++struct invoke_result {
++  typedef typename result_of<F(ArgTypes...)>::type type1;
++  typedef typename remove_all<type1>::type type;
++};
++#else
++template<typename F, typename ArgType0 = void, typename ArgType1 = void, typename ArgType2 = void>
++struct invoke_result {
++  typedef typename result_of<F(ArgType0, ArgType1, ArgType2)>::type type1;
++  typedef typename remove_all<type1>::type type;
++};
++
++template<typename F>
++struct invoke_result<F, void, void, void> {
++  typedef typename result_of<F()>::type type1;
++  typedef typename remove_all<type1>::type type;
++};
++
++template<typename F, typename ArgType0>
++struct invoke_result<F, ArgType0, void, void> {
++  typedef typename result_of<F(ArgType0)>::type type1;
++  typedef typename remove_all<type1>::type type;
++};
++
++template<typename F, typename ArgType0, typename ArgType1>
++struct invoke_result<F, ArgType0, ArgType1, void> {
++  typedef typename result_of<F(ArgType0, ArgType1)>::type type1;
++  typedef typenam
++#endif
++
+ struct meta_yes { char a[1]; };
+ struct meta_no  { char a[2]; };
+ 
+-- 
+2.31.1.windows.1
+

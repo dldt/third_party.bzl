@@ -6,9 +6,9 @@ def stb_repository():
         http_archive,
         name = "stb",
         urls = [
-            "https://github.com/nothings/stb/archive/b42009b3b9d4ca35bc703f5310eedc74f584be58.zip",
+            "https://github.com/nothings/stb/archive/c9064e317699d2e495f36ba4f9ac037e88ee371a.zip",
         ],
-        sha256 = "9dd7b5ff7538ecc8c65b9f392a0ed48f91c80a19b6f3f5a24cf1e687893fbe6b",
-        strip_prefix = "stb-b42009b3b9d4ca35bc703f5310eedc74f584be58/",
+        sha256 = "59527e3ffca9f5a27b8d9bcbe7993182b2005217fc041ad5723e668b50269c76",
+        strip_prefix = "stb-c9064e317699d2e495f36ba4f9ac037e88ee371a/",
         build_file = "@third_party//stb:package.BUILD",
     )

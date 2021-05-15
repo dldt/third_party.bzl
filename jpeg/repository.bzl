@@ -6,9 +6,9 @@ def jpeg_repository():
         http_archive,
         name = "jpeg",
         build_file = "@third_party//jpeg:package.BUILD",
-        sha256 = "017bdc33ff3a72e11301c0feb4657cb27719d7f97fa67a78ed506c594218bbf1",
-        strip_prefix = "libjpeg-turbo-2.0.6/",
+        sha256 = "9518d553961d3363148ac10a6a8b802fde24b6218475dd9b9e134d31718ab24d",
+        strip_prefix = "libjpeg-turbo-2.1.0/",
         urls = [
-            "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.6.zip",
+            "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.1.0.zip",
         ],
     )

@@ -6,10 +6,8 @@ def openexr_repository():
         http_archive,
         name = "openexr",
         urls = [
-            # Make sure to also update version information in package.BUILD
-            "https://github.com/AcademySoftwareFoundation/openexr/archive/v2.5.5.zip",
+            "https://github.com/AcademySoftwareFoundation/openexr/archive/v3.0.1.zip",
         ],
-        sha256 = "0307a3d7e1fa1e77e9d84d7e9a8694583fbbbfd50bdc6884e2c96b8ef6b902de",
-        strip_prefix = "openexr-2.5.5/",
-        build_file = "@third_party//openexr:package.BUILD",
+        sha256 = "31a92d40e6a6abd771dd3961fef7aba8190d31d3b01fb7c70bd003a20f79e5fd",
+        strip_prefix = "openexr-3.0.1/",
     )

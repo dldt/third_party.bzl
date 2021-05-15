@@ -79,7 +79,7 @@ cc_library(
         "lib/dictBuilder/*.c",
     ]),
     hdrs = [
-        "lib/dictBuilder/zdict.h",
+        "lib/zdict.h",
     ],
     includes = ["lib/dictBuilder"],
     deps = [":common"],
@@ -140,7 +140,6 @@ cc_library(
     srcs = ["lib/common/error_private.c"],
     hdrs = [
         "lib/common/error_private.h",
-        "lib/common/zstd_errors.h",
     ],
     includes = ["lib/common/"],
     deps = [":zstd_headers"],
@@ -201,7 +200,7 @@ cc_library(
 
 cc_library(
     name = "zstd_common",
-    srcs = ["lib/common/zstd_common.c", "lib/common/zstd_trace.c"],
+    srcs = ["lib/common/zstd_common.c"],
     includes = ["lib/common"],
     deps = [
         ":zstd_headers",

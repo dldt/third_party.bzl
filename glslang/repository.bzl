@@ -6,11 +6,13 @@ def glslang_repository():
         http_archive,
         name = "glslang",
         urls = [
-            "https://github.com/KhronosGroup/glslang/archive/159b05708055fdb7cb2f01005d7c35545be6852f.zip",
+            "https://github.com/KhronosGroup/glslang/archive/202c8abae0a3cb1ae725b3c97e3be3b24d1dadb0.zip",
         ],
-        sha256 = "c90209cb952f51777a1832decfc82d60b42311352f3c05e9c5df81635eff75cc",
-        strip_prefix = "glslang-159b05708055fdb7cb2f01005d7c35545be6852f/",
+        sha256 = "fa78e65cb7c5c9c49014b99bbdc2dafb2a1475e9438b3d46fcbcd5f0111849aa",
+        strip_prefix = "glslang-202c8abae0a3cb1ae725b3c97e3be3b24d1dadb0/",
         repo_mapping = {
             "@com_google_googletest": "@gtest",
         },
+        patches = ["@third_party//glslang:0001-Export-CHANGES.md-so-that-shaderc-and-other-can-extr.patch"],
+        patch_args = ["-p1"],
     )

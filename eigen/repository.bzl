@@ -11,4 +11,6 @@ def eigen_repository():
         sha256 = "83709a8def0d60dc4d17a749989893ea5e5aacf13f9184ae0509313f400f6f45",
         strip_prefix = "eigen-3.3.9/",
         build_file = "@third_party//eigen:package.BUILD",
+        patches = ["@third_party//eigen:0001-Invoke-result-c++17.patch"],
+        patch_args = ["-p1"],
     )

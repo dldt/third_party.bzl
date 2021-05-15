@@ -6,9 +6,9 @@ def gsl_repository():
         http_archive,
         name = "gsl",
         urls = [
-            "https://github.com/microsoft/GSL/archive/ef0ffefe525a6219ff245d19a832ce06f3fd3504.zip",
+            "https://github.com/microsoft/GSL/archive/c1cbb41b428f15e53454682a45f03ea31f1da0a7.zip",
         ],
-        sha256 = "034c7f1460edce79cf8c7a09a00301d986ca1ca37ce8a00ed32424964bccfc92",
-        strip_prefix = "GSL-ef0ffefe525a6219ff245d19a832ce06f3fd3504/",
+        sha256 = "a7e5eebd31af55c21b8d997e733f72f6602a6f6771e97c4ed0f338fb8f82b93e",
+        strip_prefix = "GSL-c1cbb41b428f15e53454682a45f03ea31f1da0a7/",
         build_file = "@third_party//gsl:package.BUILD",
     )

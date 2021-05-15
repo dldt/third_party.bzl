@@ -6,10 +6,10 @@ def spirv_tools_repository():
         http_archive,
         name = "spirv-tools",
         urls = [
-            "https://github.com/KhronosGroup/SPIRV-Tools/archive/f7043c0de6712bc9afa8beabe0d10dcb40b1811e.zip",
+            "https://github.com/KhronosGroup/SPIRV-Tools/archive/f0d110e3058bba9a31f9bd0a8727bdd0a559af82.zip",
         ],
-        sha256 = "cadb6d9a8e042b832f7bd4eba036912d354ea1f0dad5bdf88864c1b702881cd7",
-        strip_prefix = "SPIRV-Tools-f7043c0de6712bc9afa8beabe0d10dcb40b1811e/",
+        sha256 = "5756e12594185dae692680fe1bced7ac59bfca1eb0a717cc0cfbc85ce86565e8",
+        strip_prefix = "SPIRV-Tools-f0d110e3058bba9a31f9bd0a8727bdd0a559af82/",
         repo_mapping = {
             "@spirv_headers": "@spirv-headers",
             "@com_google_effcee": "@effcee",
