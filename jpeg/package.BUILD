@@ -1,3 +1,5 @@
+# Copied from https://github.com/tensorflow/tensorflow/blob/master/third_party/jpeg/BUILD.bazel
+
 # Description:
 #   libjpeg-turbo is a drop in replacement for jpeglib optimized with SIMD.
 

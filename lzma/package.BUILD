@@ -1,3 +1,5 @@
+# Copied from https://github.com/nelhage/rules_boost/blob/master/BUILD.lzma
+
 # Description
 #    lzma is a general purpose data compression library https://tukaani.org/xz/
 #    Public Domain

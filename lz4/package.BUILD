@@ -14,16 +14,6 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
-# lz4_hc includes a .c file...
-cc_library(
-    name = "lz4_lz4c_include",
-    hdrs = [
-        "lib/lz4.c",
-    ],
-    includes = ["lib/"],
-    visibility = ["//visibility:private"],
-)
-
 cc_library(
     name = "lz4_hc",
     srcs = [
