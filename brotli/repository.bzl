@@ -2,16 +2,6 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 
 def brotli_repository():
-    # Brotli packaging is missing a necessary file.
-    # Grab it and expose it so the package can be built
-    http_file(
-        name = "brotli_c_common_dictionary_bin",
-        downloaded_file_path = "c/common/dictionary.bin",
-        urls = ["https://github.com/google/brotli/blob/e61745a6b7add50d380cfd7d3883dd6c62fc2c71/c/common/dictionary.bin"],
-        sha256 = "",
-
-    )
-
     maybe(
         http_archive,
         name = "brotli",

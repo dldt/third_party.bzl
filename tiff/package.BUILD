@@ -1,3 +1,5 @@
+# Copy and modified from https://github.com/tensorflow/io/blob/master/third_party/libtiff.BUILD
+
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 

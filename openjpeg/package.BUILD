@@ -2,7 +2,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@third_party//:defs.bzl", "cmake_configure_file")
 
 CMAKE_DEFINES = [
-    #opjconfig
+    # opjconfig
     "OPENJPEG_VERSION_MAJOR=2",
     "OPENJPEG_VERSION_MINOR=4",
     "OPENJPEG_VERSION_BUILD=0",

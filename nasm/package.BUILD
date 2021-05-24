@@ -1,7 +1,13 @@
+# Copied from https://github.com/tensorflow/tensorflow/blob/master/third_party/nasm/BUILD.bazel
+
 # Description:
 #   NASM is a portable assembler in the Intel/Microsoft tradition.
 
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+licenses(["notice"])  # BSD 2-clause
+
+exports_files(["LICENSE"])
 
 cc_binary(
     name = "nasm",

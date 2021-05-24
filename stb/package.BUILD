@@ -1,3 +1,5 @@
+# Copied and modified from https://github.com/nitronoid/rules_stb
+
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@third_party//stb:stb.bzl", "stb_library")
 

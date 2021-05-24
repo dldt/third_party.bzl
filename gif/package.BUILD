@@ -1,3 +1,5 @@
+# Copied from https://github.com/tensorflow/tensorflow/blob/master/third_party/gif.BUILD
+
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(

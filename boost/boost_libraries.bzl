@@ -1,3 +1,5 @@
+# Inspired by https://github.com/oceboy233/boost
+
 def boost_library(
     name,
     srcs = None,

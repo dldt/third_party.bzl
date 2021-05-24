@@ -33,5 +33,5 @@ cc_library(
     }) + ["VK_NO_PROTOTYPES", "VOLK_STATIC_DEFINES"],
     includes = ["."],
     visibility = ["//visibility:public"],
-    deps = ["@vulkan"],
+    deps = ["@vulkan-headers"],
 )
