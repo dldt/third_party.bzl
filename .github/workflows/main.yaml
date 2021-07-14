@@ -18,13 +18,13 @@ jobs:
         os: [ubuntu, windows, macOS]
         include:
           - os: ubuntu
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.10.0/bazelisk-linux-amd64
             bazelcachepath: "/home/runner/.cache/bazel/_bazel_runner"
           - os: windows
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-windows-amd64.exe
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.10.0/bazelisk-windows-amd64.exe
             bazelcachepath: "/Users/runner/_bazel_runner"
           - os: macOS
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-darwin-amd64
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.10.0/bazelisk-darwin-amd64
             bazelcachepath: "/Users/runner/.cache/bazel/_bazel_runner"
 
     runs-on: ${{ matrix.os }}-latest
