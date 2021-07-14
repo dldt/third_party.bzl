@@ -7,7 +7,7 @@ startup --windows_enable_symlinks
 
 # Make sure build hierarchy is rooted under .bazel. It simplifies ignoring files
 # with bazel, vscode and others
-build --experimental_no_product_name_out_symlink
+build --symlink_prefix=.bazel/ --experimental_no_product_name_out_symlink
 
 ## Build
 
