@@ -27,19 +27,8 @@ cc_library(
         [
             "src/tbb/**/*.cpp",
             "src/tbb/**/*.h",
-            "src/rml/src/**/*.cpp",
-            "src/rml/include/**/*.h",
-            "src/rml/server/**/*.cpp",
-            "src/rml/server/**/*.h",
-            "src/rml/client/**/*.cpp",
-            "src/rml/client/**/*.h",
-        ],
-        exclude = [
-            "src/tbb/tbb_bind.cpp",
-            "src/rml/server/rml_server.cpp",
         ],
     ) + select({
-        "windows": glob(["src/tbb/intel64-masm/*.asm"]),
         "//conditions:default": [],
     }),
     hdrs = glob([
@@ -64,8 +53,8 @@ cc_library(
     defines = ["__TBB_NO_IMPLICIT_LINKAGE"],
     includes = [
         "include",
-        "src",
-        "src/rml/include",
+        "include/oneapi",
+
     ],
     linkopts = select({
         "windows": [],
