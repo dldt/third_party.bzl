@@ -19,7 +19,7 @@ cc_library(
         "include/**/*.hpp",
         "include/**/*.ipp",
         "src/**/*.hpp",
-    ]),
+    ], allow_empty=True),
     includes = ["include"],
     srcs = {srcs_repr},
     textual_hdrs = {textual_hdrs_repr},
