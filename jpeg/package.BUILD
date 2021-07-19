@@ -10,7 +10,6 @@ exports_files(["LICENSE.md"])
 load("@third_party//:defs.bzl", "template_rule")
 
 WIN_COPTS = [
-    "/Ox",
     "-DWITH_SIMD",
     "-wd4996",
 ]
