@@ -16,7 +16,7 @@ template_rule(
         "@CMAKE_CXX_STANDARD@": "20",
         "@PROJECT_VERSION_MAJOR@": "2",
         "@PROJECT_VERSION_MINOR@": "2",
-        "@PROJECT_VERSION_PATCH@": "14",
+        "@PROJECT_VERSION_PATCH@": "16",
         "@PROJECT_VERSION_TWEAK@": "0",
         "@PROJECT_VERSION_RELEASE_TYPE@": "",
         "@PROJ_NAME@": "OIIO",

@@ -6,9 +6,9 @@ def fmt_repository():
         http_archive,
         name = "fmt",
         urls = [
-            "https://github.com/fmtlib/fmt/archive/7.1.3.zip",
+            "https://github.com/fmtlib/fmt/archive/8.0.1.zip",
         ],
-        sha256 = "50f2fd9f697f89726ae3c7efe84ae48c9e03158a2958eea496eeaa0fb190adb6",
-        strip_prefix = "fmt-7.1.3/",
+        sha256 = "6747442c189064b857336007dd7fa3aaf58512aa1a0b2ba76bf1182eefb01025",
+        strip_prefix = "fmt-8.0.1/",
         build_file = "@third_party//fmt:package.BUILD",
     )

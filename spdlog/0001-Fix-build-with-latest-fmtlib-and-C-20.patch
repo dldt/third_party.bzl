@@ -1,0 +1,25 @@
+From e134966ed3a511c6f54d19a839252b1c5ee564aa Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Mon, 19 Jul 2021 21:35:30 +0200
+Subject: [PATCH] Fix build with latest fmtlib and C++20
+
+---
+ include/spdlog/common-inl.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/spdlog/common-inl.h b/include/spdlog/common-inl.h
+index 378efe60..3632ec94 100644
+--- a/include/spdlog/common-inl.h
++++ b/include/spdlog/common-inl.h
+@@ -60,7 +60,7 @@ SPDLOG_INLINE spdlog_ex::spdlog_ex(std::string msg)
+ SPDLOG_INLINE spdlog_ex::spdlog_ex(const std::string &msg, int last_errno)
+ {
+     memory_buf_t outbuf;
+-    fmt::format_system_error(outbuf, last_errno, msg);
++    fmt::format_system_error(outbuf, last_errno, msg.c_str());
+     msg_ = fmt::to_string(outbuf);
+ }
+ 
+-- 
+2.32.0.windows.2
+

@@ -11,4 +11,6 @@ def spdlog_repository():
         sha256 = "6e66c8ed4c014b0fb00c74d34eea95b5d34f6e4b51b746b1ea863dc3c2e854fd",
         strip_prefix = "spdlog-1.8.5/",
         build_file = "@third_party//spdlog:package.BUILD",
+        patches = ["@third_party//spdlog:0001-Fix-build-with-latest-fmtlib-and-C-20.patch"],
+        patch_args = ["-p1"],
     )
