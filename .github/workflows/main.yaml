@@ -33,7 +33,6 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt update
-        sudo apt install -y gcc-10 g++-10
         sudo apt install -y libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev mesa-common-dev libglvnd-dev libpulse-dev
     - uses: actions/checkout@v2
       with:
@@ -58,8 +57,8 @@ jobs:
     - name: Build
       run: |
         if ( "${{ runner.os }}" -Eq "Linux" ) {
-          ${ENV:CC} = "gcc-10"
-          ${ENV:CXX} = "g++-10"
+          ${ENV:CC} = "clang-12"
+          ${ENV:CXX} = "clang++-12"
         }
         & ./build-all.ps1
       shell: pwsh
