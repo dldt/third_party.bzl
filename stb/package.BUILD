@@ -42,27 +42,6 @@ STB_COPTS = select({
 })
 
 stb_library(
-    "stb",
-    copts = STB_COPTS + select({
-        ":windows": [],
-        "//conditions:default": [
-            "-Wno-sign-compare",
-            "-Wno-missing-field-initializers",
-            "-Wno-unused-value",
-            "-Wno-unused-but-set-variable",
-            "-Wno-format-overflow",
-            "-fno-strict-aliasing",
-        ],
-    }),
-    emit_definition_macro = "STB_DEFINE",
-    defines = select({
-        ":linux": ["_DEFAULT_SOURCE"],
-        "//conditions:default": [],
-    }),
-    stb_prefix = False,
-)
-
-stb_library(
     name = "c_lexer",
     copts = STB_COPTS + select({
         ":windows": [],

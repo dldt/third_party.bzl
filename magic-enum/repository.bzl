@@ -6,9 +6,9 @@ def magic_enum_repository():
         http_archive,
         name = "magic-enum",
         urls = [
-            "https://github.com/Neargye/magic_enum/archive/v0.7.2.zip",
+            "https://github.com/Neargye/magic_enum/archive/v0.7.3.zip",
         ],
-        sha256 = "189110e4975af67351bc918690dfc6df047afc11b704140615401a1c5d05619c",
-        strip_prefix = "magic_enum-0.7.2/",
+        sha256 = "764cce907d10923d449f1534e785b2a11b0a719d214410b1993da9f8e19ec418",
+        strip_prefix = "magic_enum-0.7.3/",
         build_file = "@third_party//magic-enum:package.BUILD",
     )

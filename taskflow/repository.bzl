@@ -6,9 +6,9 @@ def taskflow_repository():
         http_archive,
         name = "taskflow",
         urls = [
-            "https://github.com/taskflow/taskflow/archive/refs/tags/v3.1.0.zip",
+            "https://github.com/taskflow/taskflow/archive/refs/tags/v3.2.0.zip",
         ],
-        sha256 = "3b1499ef1bbd4c68942b59602fb098fb22aedfbaf4924f0c25ce71ba3370d73f",
-        strip_prefix = "taskflow-3.1.0/",
+        sha256 = "dec011fcd9d73ae4bd8ae4d2714c2c108a013d5f27761d77aa33ea28f516ac8a",
+        strip_prefix = "taskflow-3.2.0/",
         build_file = "@third_party//taskflow:package.BUILD",
     )

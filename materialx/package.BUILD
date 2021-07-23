@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "objc_library")
 
 cc_library(
     name = "MaterialXCore",
@@ -7,8 +7,8 @@ cc_library(
     includes = ["source/"],
     local_defines = [
         "MATERIALX_MAJOR_VERSION=1",
-        "MATERIALX_MINOR_VERSION=37",
-        "MATERIALX_BUILD_VERSION=4",
+        "MATERIALX_MINOR_VERSION=38",
+        "MATERIALX_BUILD_VERSION=1",
     ],
     visibility = ["//visibility:public"],
 )
@@ -23,16 +23,19 @@ cc_library(
     hdrs = glob([
         "source/MaterialXFormat/*.h",
     ]),
+    data = glob(
+        [
+            "libraries/**",
+        ],
+        exclude = [
+            "README.md",
+            "libraries/**/genglsl/**",
+            "libraries/**/genosl/**",
+        ],
+    ),
     includes = ["source/"],
     visibility = ["//visibility:public"],
     deps = [":MaterialXCore"],
-    data = glob([
-        "libraries/**"
-    ], exclude = [
-        "README.md",
-        "libraries/**/genglsl/**",
-        "libraries/**/genosl/**",
-    ]),
 )
 
 cc_library(
@@ -63,15 +66,15 @@ cc_library(
         "source/MaterialXGenGlsl/*.h",
         "source/MaterialXGenGlsl/Nodes/*.h",
     ]),
+    data = glob([
+        "libraries/**/genglsl/**",
+    ]),
     includes = ["source/"],
     visibility = ["//visibility:public"],
     deps = [
         ":MaterialXCore",
         ":MaterialXGenShader",
     ],
-    data = glob([
-        "libraries/**/genglsl/**",
-    ]),
 )
 
 cc_library(
@@ -84,15 +87,36 @@ cc_library(
         "source/MaterialXGenOsl/*.h",
         "source/MaterialXGenOsl/Nodes/*.h",
     ]),
+    data = glob([
+        "libraries/**/genosl/**",
+    ]),
     includes = ["source/"],
     visibility = ["//visibility:public"],
     deps = [
         ":MaterialXCore",
         ":MaterialXGenShader",
     ],
-    data = glob([
-        "libraries/**/genosl/**",
+)
+
+cc_library(
+    name = "MaterialXGenMdl",
+    srcs = glob([
+        "source/MaterialXGenMdl/*.cpp",
+        "source/MaterialXGenMdl/Nodes/*.cpp",
     ]),
+    hdrs = glob([
+        "source/MaterialXGenMdl/*.h",
+        "source/MaterialXGenMdl/Nodes/*.h",
+    ]),
+    data = glob([
+        "libraries/**/genmdl/**",
+    ]),
+    includes = ["source/"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":MaterialXCore",
+        ":MaterialXGenShader",
+    ],
 )
 
 cc_library(
@@ -102,7 +126,11 @@ cc_library(
     ]),
     hdrs = glob([
         "source/MaterialXRender/*.h",
-    ]),
+    ]) + [
+        "source/MaterialXRender/External/TinyObjLoader/tiny_obj_loader.h",
+        "source/MaterialXRender/External/StbImage/stb_image.h",
+        "source/MaterialXRender/External/StbImage/stb_image_write.h",
+    ],
     includes = ["source/"],
     deps = [
         ":MaterialXCore",
@@ -110,9 +138,11 @@ cc_library(
         "@openimageio//:OpenImageIO",
     ],
 )
+# Objective C files: /Users/tarcila/Projects/third_party.bzl/tmp/MaterialX/source/MaterialXRenderHw/WindowCocoaWrappers.m
+# Objective C files: /Users/tarcila/Projects/third_party.bzl/tmp/MaterialX/source/MaterialXRenderGlsl/GLCocoaWrappers.m
 
 cc_library(
-    name = "MaterialXRenderHw",
+    name = "MaterialXRenderHw_default",
     srcs = glob([
         "source/MaterialXRenderHw/*.cpp",
     ]),
@@ -126,8 +156,19 @@ cc_library(
     ],
 )
 
+objc_library(
+    name = "MaterialXRenderHw_osx",
+    hdrs = glob([
+        "source/MaterialXRenderHw/*.h",
+    ]),
+    includes = ["source/"],
+    non_arc_srcs = ["source/MaterialXRenderHw/WindowCocoaWrappers.m"],
+    sdk_frameworks = ["OpenGL"],
+    deps = [":MaterialXRenderHw_default"],
+)
+
 cc_library(
-    name = "MaterialXRenderGlsl",
+    name = "MaterialXRenderGlsl_default",
     srcs = glob([
         "source/MaterialXRenderGlsl/*.cpp",
         "source/MaterialXRenderGlsl/External/GLew/*.cpp",
@@ -139,9 +180,40 @@ cc_library(
     includes = ["source/"],
     deps = [
         ":MaterialXCore",
+        ":MaterialXGenGlsl",
         ":MaterialXRender",
         ":MaterialXRenderHw",
     ],
+    linkopts = select({
+        "linux": ["-lXt"],
+        "//conditions:default": [],
+    })
+)
+
+alias(
+    name = "MaterialXRenderHw",
+    actual = select({
+        ":osx": "MaterialXRenderHw_osx",
+        "//conditions:default": "MaterialXRenderHw_default",
+    }),
+)
+
+objc_library(
+    name = "MaterialXRenderGlsl_osx",
+    hdrs = glob([
+        "source/MaterialXRenderGlsl/*.h",
+    ]),
+    includes = ["source/"],
+    non_arc_srcs = ["source/MaterialXRenderGlsl/GLCocoaWrappers.m"],
+    deps = [":MaterialXRenderGlsl_default"],
+)
+
+alias(
+    name = "MaterialXRenderGlsl",
+    actual = select({
+        ":osx": "MaterialXRenderGlsl_osx",
+        "//conditions:default": "MaterialXRenderGlsl_default",
+    }),
 )
 
 cc_library(
@@ -155,6 +227,24 @@ cc_library(
     includes = ["source/"],
     deps = [
         ":MaterialXCore",
+        ":MaterialXGenOsl",
+        ":MaterialXRender",
+        ":MaterialXRenderHw",
+    ],
+)
+
+cc_library(
+    name = "MaterialXRenderMdl",
+    srcs = glob([
+        "source/MaterialXRenderMdl/*.cpp",
+    ]),
+    hdrs = glob([
+        "source/MaterialXRenderMdl/*.h",
+    ]),
+    includes = ["source/"],
+    deps = [
+        ":MaterialXCore",
+        ":MaterialXGenMdl",
         ":MaterialXRender",
         ":MaterialXRenderHw",
     ],
@@ -168,6 +258,15 @@ cc_binary(
         "source/MaterialXView/nanogui/*.cpp",
         "source/MaterialXView/nanogui/*.h",
     ]),
+    data = glob(
+        [
+            "resources/**",
+        ],
+        exclude = [
+            "resources/CMakeLists.txt",
+            "resources/README.md",
+        ],
+    ),
     includes = [
         "source/",
         "source/MaterialXView/",
@@ -175,13 +274,22 @@ cc_binary(
     deps = [
         ":MaterialXCore",
         ":MaterialXGenGlsl",
+        ":MaterialXGenMdl",
+        ":MaterialXGenOsl",
         ":MaterialXRenderGlsl",
+        ":MaterialXRenderMdl",
+        ":MaterialXRenderOsl",
         "@nanogui",
     ],
-    data = glob([
-        "resources/**",
-    ], exclude = [
-        "resources/CMakeLists.txt",
-        "resources/README.md",
-    ]),
+)
+
+config_setting(
+    name = "linux",
+    constraint_values = ["@platforms//os:linux"],
+)
+
+
+config_setting(
+    name = "osx",
+    constraint_values = ["@platforms//os:osx"],
 )

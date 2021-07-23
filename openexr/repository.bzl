@@ -6,8 +6,13 @@ def openexr_repository():
         http_archive,
         name = "openexr",
         urls = [
-            "https://github.com/AcademySoftwareFoundation/openexr/archive/v3.0.1.zip",
+            "https://github.com/AcademySoftwareFoundation/openexr/archive/v3.1.0.zip",
         ],
-        sha256 = "31a92d40e6a6abd771dd3961fef7aba8190d31d3b01fb7c70bd003a20f79e5fd",
-        strip_prefix = "openexr-3.0.1/",
+        sha256 = "52151eea9b66a92cdbc651a074a178e2cfdd85005628ce199b7d44e50393e74a",
+        strip_prefix = "openexr-3.1.0/",
+        repo_mapping = {
+            "@net_zlib_zlib": "@zlib",
+        },
+        patches = ["@third_party//openexr:0001-Fix-config.h-generation.patch"],
+        patch_args = ["-p1"],
     )

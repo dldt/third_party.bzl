@@ -1,0 +1,24 @@
+From 22057c2fe032790f0a4e9d14bdb4935132491760 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sun, 1 Aug 2021 07:42:38 +0200
+Subject: [PATCH] Missing header in stb_dxt
+
+---
+ stb_dxt.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/stb_dxt.h b/stb_dxt.h
+index 6150a87..89e09ed 100644
+--- a/stb_dxt.h
++++ b/stb_dxt.h
+@@ -83,6 +83,7 @@ STBDDEF void stb_compress_bc5_block(unsigned char *dest, const unsigned char *sr
+ // #define STB_DXT_USE_ROUNDING_BIAS
+ 
+ #include <stdlib.h>
++#include <string.h>
+ 
+ #if !defined(STBD_FABS)
+ #include <math.h>
+-- 
+2.32.0
+

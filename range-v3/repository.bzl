@@ -6,10 +6,10 @@ def range_v3_repository():
         http_archive,
         name = "range-v3",
         urls = [
-            "https://github.com/ericniebler/range-v3/archive/0.11.0.zip",
+            "https://github.com/ericniebler/range-v3/archive/0487cca29e352e8f16bbd91fda38e76e39a0ed28.zip",
         ],
-        sha256 = "269e6a5ec8ac9967d5a052e6e312caff5e9f739b149feb402d13719af967b2d6",
-        strip_prefix = "range-v3-0.11.0/",
+        sha256 = "e3992d30629d058e5918b9721d6fbdbc20f72b298cdf5cfb96e798fc4b5b54fe",
+        strip_prefix = "range-v3-0487cca29e352e8f16bbd91fda38e76e39a0ed28/",
         build_file = "@third_party//range-v3:package.BUILD",
         patches = ["@third_party//range-v3:0001-Workaround-conflict-with-Xlib.h-define.patch"],
         patch_args = ["-p1"],

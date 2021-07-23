@@ -6,19 +6,14 @@ def spirv_tools_repository():
         http_archive,
         name = "spirv-tools",
         urls = [
-            "https://github.com/KhronosGroup/SPIRV-Tools/archive/f0d110e3058bba9a31f9bd0a8727bdd0a559af82.zip",
+            "https://github.com/KhronosGroup/SPIRV-Tools/archive/b2db20a7e8bf10f9da176dccf58b9c7aaaec2ccd.zip",
         ],
-        sha256 = "5756e12594185dae692680fe1bced7ac59bfca1eb0a717cc0cfbc85ce86565e8",
-        strip_prefix = "SPIRV-Tools-f0d110e3058bba9a31f9bd0a8727bdd0a559af82/",
+        sha256 = "7c3231476150087eefbc4d162d8885964e0d6a2bcf2bc51c1369d1bc27d081e2",
+        strip_prefix = "SPIRV-Tools-b2db20a7e8bf10f9da176dccf58b9c7aaaec2ccd/",
         repo_mapping = {
             "@spirv_headers": "@spirv-headers",
             "@com_google_effcee": "@effcee",
             "@com_google_googletest": "@gtest",
             "@com_googlesource_code_re2": "@re2",
         },
-        patches = [
-            "@third_party//spirv-tools:0001-small_vector-Fix-C-20-comparison-operator-issue.patch",
-            "@third_party//spirv-tools:0002-Workaround-warning-as-error.patch"
-        ],
-        patch_args = ["-p1"],
     )

@@ -6,10 +6,10 @@ def benchmark_repository():
         http_archive,
         name = "benchmark",
         urls = [
-            "https://github.com/google/benchmark/archive/v1.5.3.zip",
+            "https://github.com/google/benchmark/archive/v1.5.5.zip",
         ],
-        sha256 = "bdefa4b03c32d1a27bd50e37ca466d8127c1688d834800c38f3c587a396188ee",
-        strip_prefix = "benchmark-1.5.3/",
+        sha256 = "30f2e5156de241789d772dd8b130c1cb5d33473cc2f29e4008eab680df7bd1f0",
+        strip_prefix = "benchmark-1.5.5/",
         repo_mapping = {
             "@com_google_googletest": "@gtest",
             "@python_headers": "@local_config_python",

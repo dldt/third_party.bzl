@@ -1,0 +1,24 @@
+From 4cb5a4edf9d58839d9ba8379b98f0b78b1e35493 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Fri, 23 Jul 2021 07:29:55 +0200
+Subject: [PATCH] missing header file
+
+---
+ src/tool/generate_ech.cc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/tool/generate_ech.cc b/src/tool/generate_ech.cc
+index 1fe501db0..f1e8cbea1 100644
+--- a/src/tool/generate_ech.cc
++++ b/src/tool/generate_ech.cc
+@@ -14,6 +14,7 @@
+ 
+ #include <stdio.h>
+ 
++#include <limits>
+ #include <vector>
+ 
+ #include <openssl/bytestring.h>
+-- 
+2.31.1
+

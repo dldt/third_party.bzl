@@ -6,9 +6,9 @@ def glfw_repository():
         http_archive,
         name = "glfw",
         urls = [
-            "https://github.com/glfw/glfw/releases/download/3.3.3/glfw-3.3.3.zip",
+            "https://github.com/glfw/glfw/releases/download/3.3.4/glfw-3.3.4.zip",
         ],
-        sha256 = "723087ad45b40cd333be7d1a2cd5e09a28facb7f3acdb69f3e5613bd20543977",
-        strip_prefix = "glfw-3.3.3/",
+        sha256 = "bbd2c42c660b725e9755eb417e40b373f0d4c03138c9b2e210d02cd308bd99cd",
+        strip_prefix = "glfw-3.3.4/",
         build_file = "@third_party//glfw:package.BUILD",
     )
