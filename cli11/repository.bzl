@@ -6,10 +6,10 @@ def cli11_repository():
         http_archive,
         name = "cli11",
         urls = [
-            "https://github.com/CLIUtils/CLI11/archive/v1.9.1.zip",
+            "https://github.com/CLIUtils/CLI11/archive/v2.0.0.zip",
         ],
-        sha256 = "281da4f0711b00cc1da770f27330f00efc735b778c33962d798da26d57419f36",
-        strip_prefix = "CLI11-1.9.1/",
+        sha256 = "e488c75ca5077c302dfea153c4b67bda7fff53c470a8cedf9d7efbea169cca4a",
+        strip_prefix = "CLI11-2.0.0/",
         build_file = "@third_party//cli11:package.BUILD",
         patch_cmds = ["rm -fr tests/mesonTest/subprojects/CLI11"],
         patch_cmds_win = ["rm -Recurse -Force tests/mesonTest/subprojects/CLI11"],

@@ -6,9 +6,9 @@ def inja_repository():
         http_archive,
         name = "inja",
         urls = [
-            "https://github.com/pantor/inja/archive/v3.2.0.zip",
+            "https://github.com/pantor/inja/archive/v3.3.0.zip",
         ],
-        sha256 = "4e05f6119b70a473ef61d4568d72001244b15c42dea9a4d2b7f826f4eff73285",
-        strip_prefix = "inja-3.2.0/",
+        sha256 = "a95e95ff39961be429d564689d265a2eb2f269cb180bb0028c842a7484916cb6",
+        strip_prefix = "inja-3.3.0/",
         build_file = "@third_party//inja:package.BUILD",
     )

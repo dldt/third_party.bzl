@@ -6,10 +6,10 @@ def abseil_repository():
         http_archive,
         name = "abseil",
         urls = [
-            "https://github.com/abseil/abseil-cpp/archive/refs/tags/20210324.1.zip",
+            "https://github.com/abseil/abseil-cpp/archive/refs/tags/20210324.2.zip",
         ],
-        sha256 = "cfb1f22164808eb0a233ad91287df84c2af2084cfc8b429eca1be1e57511065d",
-        strip_prefix = "abseil-cpp-20210324.1/",
+        sha256 = "1a7edda1ff56967e33bc938a4f0a68bb9efc6ba73d62bb4a5f5662463698056c",
+        strip_prefix = "abseil-cpp-20210324.2/",
         repo_mapping = {
             "@com_google_googletest": "@gtest",
             "@com_github_google_benchmark": "@benchmark",

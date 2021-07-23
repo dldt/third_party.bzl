@@ -6,9 +6,9 @@ def tomlplusplus_repository():
         http_archive,
         name = "tomlplusplus",
         urls = [
-            "https://github.com/marzer/tomlplusplus/archive/v2.3.0.zip",
+            "https://github.com/marzer/tomlplusplus/archive/v2.4.0.zip",
         ],
-        sha256 = "2f239dca3369af174a5e1e98db3bbf1dbc72baae0a928b656a404ab272b80cbc",
-        strip_prefix = "tomlplusplus-2.3.0/",
+        sha256 = "f1909ad4242331b7b9dce594b976214357361f271f332875607bd272d4007714",
+        strip_prefix = "tomlplusplus-2.4.0/",
         build_file = "@third_party//tomlplusplus:package.BUILD",
     )

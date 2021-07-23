@@ -70,6 +70,7 @@ cc_library(
     }),
     local_defines = select({
         "windows": ["USE_WINTHREAD=1"],
+        "osx": ["_XOPEN_SOURCE"],
         "//conditions:default": ["USE_PTHREAD"],
     }) + ["__TBB_BUILD=1","TBB_SUPPRESS_DEPRECATED_MESSAGES=1"],
     textual_hdrs = [

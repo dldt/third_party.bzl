@@ -11,4 +11,6 @@ def fmt_repository():
         sha256 = "6747442c189064b857336007dd7fa3aaf58512aa1a0b2ba76bf1182eefb01025",
         strip_prefix = "fmt-8.0.1/",
         build_file = "@third_party//fmt:package.BUILD",
+        patches = ["@third_party//fmt:0001-Workaround-compilation-issue-with-Apple-Clang.patch"],
+        patch_args = ["-p1"],
     )

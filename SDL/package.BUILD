@@ -119,6 +119,7 @@ objc_library(
         "Carbon",
         "Cocoa",
         "IOKit",
+        "UIKit",
         "CoreGraphics",
         "Metal",
         "GameController",

@@ -1,0 +1,29 @@
+From 4ac6c5925a435be27cfc3d3a3bd69ffecf6e8603 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Sat, 31 Jul 2021 07:37:35 +0200
+Subject: [PATCH] Workaround compilation issue with Apple Clang
+
+---
+ include/fmt/core.h | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/include/fmt/core.h b/include/fmt/core.h
+index d058398a..67dec405 100644
+--- a/include/fmt/core.h
++++ b/include/fmt/core.h
+@@ -2832,7 +2832,11 @@ template <typename Char, typename... Args> class basic_format_string {
+   template <typename S,
+             FMT_ENABLE_IF(
+                 std::is_convertible<const S&, basic_string_view<Char>>::value)>
+-  FMT_CONSTEVAL basic_format_string(const S& s) : str_(s) {
++
++#ifdef FMT_HAS_CONSTEVAL
++constexpr
++#endif
++basic_format_string(const S& s) : str_(s) {
+     static_assert(
+         detail::count<
+             (std::is_base_of<detail::view, remove_reference_t<Args>>::value &&
+-- 
+2.32.0
+

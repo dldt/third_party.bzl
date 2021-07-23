@@ -6,17 +6,8 @@ def gtest_repository():
         http_archive,
         name = "gtest",
         urls = [
-            "https://github.com/google/googletest/archive/release-1.10.0.zip",
+            "https://github.com/google/googletest/archive/release-1.11.0.zip",
         ],
-        sha256 = "94c634d499558a76fa649edb13721dce6e98fb1e7018dfaeba3cd7a083945e91",
-        strip_prefix = "googletest-release-1.10.0/",
-        patches = [
-            "@third_party//gtest:std_resultof.patch",
-            "@third_party//gtest:msvc_pp.patch",
-            "@third_party//gtest:msvc_pp1.patch",
-            "@third_party//gtest:msvc_pp2.patch",
-            "@third_party//gtest:msvc_pp3.patch",
-            "@third_party//gtest:msvc_pp4.patch",
-        ],
-        patch_args = ["-p1"],
+        sha256 = "353571c2440176ded91c2de6d6cd88ddd41401d14692ec1f99e35d013feda55a",
+        strip_prefix = "googletest-release-1.11.0/",
     )

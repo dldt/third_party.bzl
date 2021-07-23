@@ -6,10 +6,10 @@ def shaderc_repository():
         http_archive,
         name = "shaderc",
         urls = [
-            "https://github.com/google/shaderc/archive/v2021.0.zip",
+            "https://github.com/google/shaderc/archive/v2021.1.zip",
         ],
-        sha256 = "6e88a4a5b3c2b573d86abb271a13f1cf58049dbe2097ddd0cab6ee3c9df98a2a",
-        strip_prefix = "shaderc-2021.0/",
+        sha256 = "ec24c7e575a2d8adafb494249d392bf9e784299c5d59388edb85980bc19d9ca3",
+        strip_prefix = "shaderc-2021.1/",
         build_file = "@third_party//shaderc:package.BUILD",
         patches = ["@third_party//shaderc:0001-Fix-recursive-call-being-generated-with-c-20.patch"],
         patch_args = ["-p1"],
