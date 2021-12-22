@@ -1,15 +1,28 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "objc_library")
+load("@third_party//:defs.bzl", "cmake_configure_file")
+
+CMAKE_DEFINES = [
+    "MATERIALX_MAJOR_VERSION=1",
+    "MATERIALX_MINOR_VERSION=38",
+    "MATERIALX_BUILD_VERSION=3",
+    "MATERIALX_NAMESPACE=MaterialX_v1_38_3",
+]
+
+CMAKE_UNDEFS = []
+
+cmake_configure_file(
+    name = "MaterialXCoreGenerated_h",
+    src = "source/MaterialXCore/Generated.h.in",
+    out = "source/MaterialXCore/Generated.h",
+    defines = CMAKE_DEFINES,
+    undefines = CMAKE_UNDEFS,
+)
 
 cc_library(
     name = "MaterialXCore",
     srcs = glob(["source/MaterialXCore/*.cpp"]),
-    hdrs = glob(["source/MaterialXCore/*.h"]),
+    hdrs = glob(["source/MaterialXCore/*.h"]) + [":MaterialXCoreGenerated_h"],
     includes = ["source/"],
-    local_defines = [
-        "MATERIALX_MAJOR_VERSION=1",
-        "MATERIALX_MINOR_VERSION=38",
-        "MATERIALX_BUILD_VERSION=1",
-    ],
     visibility = ["//visibility:public"],
 )
 
@@ -138,8 +151,6 @@ cc_library(
         "@openimageio//:OpenImageIO",
     ],
 )
-# Objective C files: /Users/tarcila/Projects/third_party.bzl/tmp/MaterialX/source/MaterialXRenderHw/WindowCocoaWrappers.m
-# Objective C files: /Users/tarcila/Projects/third_party.bzl/tmp/MaterialX/source/MaterialXRenderGlsl/GLCocoaWrappers.m
 
 cc_library(
     name = "MaterialXRenderHw_default",
@@ -178,16 +189,16 @@ cc_library(
         "source/MaterialXRenderGlsl/*.h",
     ]),
     includes = ["source/"],
+    linkopts = select({
+        "linux": ["-lXt"],
+        "//conditions:default": [],
+    }),
     deps = [
         ":MaterialXCore",
         ":MaterialXGenGlsl",
         ":MaterialXRender",
         ":MaterialXRenderHw",
     ],
-    linkopts = select({
-        "linux": ["-lXt"],
-        "//conditions:default": [],
-    })
 )
 
 alias(
@@ -287,7 +298,6 @@ config_setting(
     name = "linux",
     constraint_values = ["@platforms//os:linux"],
 )
-
 
 config_setting(
     name = "osx",

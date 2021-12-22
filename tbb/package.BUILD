@@ -54,7 +54,6 @@ cc_library(
     includes = [
         "include",
         "include/oneapi",
-
     ],
     linkopts = select({
         "windows": [],
@@ -72,7 +71,10 @@ cc_library(
         "windows": ["USE_WINTHREAD=1"],
         "osx": ["_XOPEN_SOURCE"],
         "//conditions:default": ["USE_PTHREAD"],
-    }) + ["__TBB_BUILD=1","TBB_SUPPRESS_DEPRECATED_MESSAGES=1"],
+    }) + [
+        "__TBB_BUILD=1",
+        "TBB_SUPPRESS_DEPRECATED_MESSAGES=1",
+    ],
     textual_hdrs = [
         "src/tbb/dynamic_link.cpp",
     ],

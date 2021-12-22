@@ -39,7 +39,10 @@ cc_library(
 
 objc_library(
     name = "SDL_image_objc",
-    non_arc_srcs = glob(["*.m"], exclude = ["IMG_UIImage.m"]),
+    non_arc_srcs = glob(
+        ["*.m"],
+        exclude = ["IMG_UIImage.m"],
+    ),
     deps = [":SDL_image_cpp"],
 )
 

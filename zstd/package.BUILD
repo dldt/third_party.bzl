@@ -4,7 +4,17 @@ package(default_visibility = ["//visibility:public"])
 
 config_setting(
     name = "windows",
-    constraint_values = ["@platforms//os:windows"],
+    constraint_values = [
+        "@platforms//os:windows",
+    ],
+)
+
+config_setting(
+    name = "x86_64_windows",
+    constraint_values = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:windows",
+    ],
 )
 
 cc_library(
@@ -119,7 +129,10 @@ cc_library(
         "lib/compress/fse_compress.c",
         "lib/compress/huf_compress.c",
         "lib/decompress/huf_decompress.c",
-    ],
+    ] + select({
+        "x86_64_windows": [],
+        "//conditions:default": ["lib/decompress/huf_decompress_amd64.S"],
+    }),
     hdrs = [
         "lib/common/fse.h",
         "lib/common/huf.h",
@@ -195,7 +208,7 @@ cc_library(
     includes = ["lib/common/"],
     deps = [
         ":zstd_headers",
-    ]
+    ],
 )
 
 cc_library(
@@ -203,10 +216,10 @@ cc_library(
     srcs = ["lib/common/zstd_common.c"],
     includes = ["lib/common"],
     deps = [
-        ":zstd_headers",
         ":compiler",
         ":errors",
         ":mem",
+        ":zstd_headers",
     ],
 )
 

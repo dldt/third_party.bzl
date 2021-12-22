@@ -6,8 +6,8 @@ def pybind11_bazel_repository():
         http_archive,
         name = "pybind11_bazel",
         urls = [
-            "https://github.com/pybind/pybind11_bazel/archive/26973c0ff320cb4b39e45bc3e4297b82bc3a6c09.zip",
+            "https://github.com/pybind/pybind11_bazel/archive/72cbbf1fbc830e487e3012862b7b720001b70672.zip",
         ],
-        sha256 = "a5666d950c3344a8b0d3892a88dc6b55c8e0c78764f9294e806d69213c03f19d",
-        strip_prefix = "pybind11_bazel-26973c0ff320cb4b39e45bc3e4297b82bc3a6c09/",
+        sha256 = "fec6281e4109115c5157ca720b8fe20c8f655f773172290b03f57353c11869c2",
+        strip_prefix = "pybind11_bazel-72cbbf1fbc830e487e3012862b7b720001b70672/",
     )

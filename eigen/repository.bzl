@@ -6,11 +6,11 @@ def eigen_repository():
         http_archive,
         name = "eigen",
         urls = [
-            "https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.zip",
+            "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip",
         ],
-        sha256 = "83709a8def0d60dc4d17a749989893ea5e5aacf13f9184ae0509313f400f6f45",
-        strip_prefix = "eigen-3.3.9/",
+        sha256 = "1ccaabbfe870f60af3d6a519c53e09f3dcf630207321dffa553564a8e75c4fc8",
+        strip_prefix = "eigen-3.4.0/",
         build_file = "@third_party//eigen:package.BUILD",
-        patches = ["@third_party//eigen:0001-Invoke-result-c++17.patch"],
+        #patches = ["@third_party//eigen:0001-Invoke-result-c++17.patch"],
         patch_args = ["-p1"],
     )

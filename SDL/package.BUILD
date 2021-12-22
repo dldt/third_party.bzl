@@ -99,7 +99,6 @@ objc_library(
         ],
     ),
     hdrs = SDL_HEADERS,
-    textual_hdrs = ["src/thread/generic/SDL_syssem.c"],
     includes = [
         "include/",
         "src/",
@@ -114,6 +113,7 @@ objc_library(
         "src/sensor/coremotion/*.m",
         "src/video/cocoa/*.m",
     ]),
+    textual_hdrs = ["src/thread/generic/SDL_syssem.c"],
     weak_sdk_frameworks = [
         "CoreAudio",
         "Carbon",
@@ -235,13 +235,19 @@ cc_library(
 
 cc_library(
     name = "SDL_main_windows",
-    srcs = ["src/main/windows/SDL_windows_main.c", "include/SDL_main.h"],
+    srcs = [
+        "include/SDL_main.h",
+        "src/main/windows/SDL_windows_main.c",
+    ],
     deps = [":SDL"],
 )
 
 cc_library(
     name = "SDL_main_unix",
-    srcs = ["src/main/dummy/SDL_dummy_main.c", "include/SDL_main.h"],
+    srcs = [
+        "include/SDL_main.h",
+        "src/main/dummy/SDL_dummy_main.c",
+    ],
     deps = [":SDL"],
 )
 
@@ -264,4 +270,3 @@ alias(
     }),
     visibility = ["//visibility:public"],
 )
-

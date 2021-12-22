@@ -6,10 +6,10 @@ def stb_repository():
         http_archive,
         name = "stb",
         urls = [
-            "https://github.com/nothings/stb/archive/3a1174060a7dd4eb652d4e6854bc4cd98c159200.zip",
+            "https://github.com/nothings/stb/archive/af1a5bc352164740c1cc1354942b1c6b72eacb8a.zip",
         ],
-        sha256 = "9313f6871195b97771ce7da1feae0b3d92c7936456f13099edb54a78096ca93c",
-        strip_prefix = "stb-3a1174060a7dd4eb652d4e6854bc4cd98c159200/",
+        sha256 = "e3d0edbecd356506d3d69b87419de2f9d180a98099134c6343177885f6c2cbef",
+        strip_prefix = "stb-af1a5bc352164740c1cc1354942b1c6b72eacb8a/",
         build_file = "@third_party//stb:package.BUILD",
         patches = ["@third_party//stb:0001-Missing-header-in-stb_dxt.patch"],
         patch_args = ["-p1"],

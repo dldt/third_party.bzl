@@ -117,7 +117,8 @@ cc_library(
         "-fno-common",
         "-fwrapv",
     ],
-    includes=[
+    defines = ["HAVE_CONFIG_H=1"],
+    includes = [
         "asm/",
         "config/",
         "disasm/",
@@ -127,14 +128,13 @@ cc_library(
         "rdoff/",
         "x86/",
     ],
-    defines = ["HAVE_CONFIG_H=1"],
 )
 
 cc_binary(
     name = "nasm",
     srcs = ["asm/nasm.c"],
-    deps = [":nasmlib"],
     visibility = ["//visibility:public"],
+    deps = [":nasmlib"],
 )
 
 config_setting(

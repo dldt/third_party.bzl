@@ -6,10 +6,10 @@ def boringssl_repository():
         http_archive,
         name = "boringssl",
         urls = [
-            "https://github.com/google/boringssl/archive/d0d26c70e23e30af436566c63500c69a83e6e4fe.zip",
+            "https://github.com/google/boringssl/archive/74b0651bbc58ffd1e0622918da52e82532938e07.zip",
         ],
-        sha256 = "607a20c6be91f20df0c2766698c025673f7ffd6de64ee5fb445fb7f300bff4f6",
-        strip_prefix = "boringssl-d0d26c70e23e30af436566c63500c69a83e6e4fe/",
-        patches = ["@third_party//boringssl:0001-missing-header-file.patch"],
+        sha256 = "9d2b2cecb25a9d51df4ee961e8eea1fd344b52726e29a9df207a0cf66305e8ed",
+        strip_prefix = "boringssl-74b0651bbc58ffd1e0622918da52e82532938e07/",
+        #patches = ["@third_party//boringssl:0001-missing-header-file.patch"],
         patch_args = ["-p1"],
     )

@@ -6,11 +6,9 @@ def spdlog_repository():
         http_archive,
         name = "spdlog",
         urls = [
-            "https://github.com/gabime/spdlog/archive/v1.9.1.zip",
+            "https://github.com/gabime/spdlog/archive/v1.9.2.zip",
         ],
-        sha256 = "1a383a1d6bf604759c310a0b464a83afc54cc3147192d61c3d0c59695b38ff79",
-        strip_prefix = "spdlog-1.9.1/",
+        sha256 = "130bd593c33e2e2abba095b551db6a05f5e4a5a19c03ab31256c38fa218aa0a6",
+        strip_prefix = "spdlog-1.9.2/",
         build_file = "@third_party//spdlog:package.BUILD",
-        #patches = ["@third_party//spdlog:0001-Fix-build-with-latest-fmtlib-and-C-20.patch"],
-        #patch_args = ["-p1"],
     )

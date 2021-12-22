@@ -6,9 +6,9 @@ def imgui_repository():
         http_archive,
         name = "imgui",
         urls = [
-            "https://github.com/ocornut/imgui/archive/v1.82.zip",
+            "https://github.com/ocornut/imgui/archive/v1.85.zip",
         ],
-        sha256 = "e5d450c8b3ebfb7fa2fbef5528e3e80f9df7a459e5a3ac29a29409a022f4c2d8",
-        strip_prefix = "imgui-1.82/",
+        sha256 = "066a399b6557d6ed91680b2bb05780071e96d9211209d4f0a57176f76d06ab0d",
+        strip_prefix = "imgui-1.85/",
         build_file = "@third_party//imgui:package.BUILD",
     )

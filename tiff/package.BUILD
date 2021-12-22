@@ -2,7 +2,6 @@
 
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
-
 genrule(
     name = "tiffconf_h",
     outs = ["libtiff/tiffconf.h"],
@@ -236,8 +235,8 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "@jpeg",
-        "@webp",
         "@lzma",
+        "@webp",
         "@zlib",
         "@zstd//:libzstd",
     ],
