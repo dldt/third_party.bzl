@@ -123,12 +123,6 @@ stb_library(
 )
 
 stb_library(
-    name = "perlin",
-    copts = STB_COPTS,
-    emit_definition_macro = "STB_PERLIN_IMPLEMENTATION",
-)
-
-stb_library(
     name = "rect_pack",
     copts = STB_COPTS,
     emit_definition_macro = "STB_RECT_PACK_IMPLEMENTATION",
@@ -151,11 +145,6 @@ stb_library(
 stb_library(
     name = "voxel_render",
     copts = STB_COPTS,
-)
-
-stb_library(
-    name = "stretchy_buffer",
-    stb_prefix = False,
 )
 
 # stb_vorbis has a reversed mechanism

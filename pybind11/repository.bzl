@@ -5,8 +5,8 @@ def pybind11_repository():
     maybe(
         http_archive,
         name = "pybind11",
-        urls = ["https://github.com/pybind/pybind11/archive/v2.7.0.zip"],
+        urls = ["https://github.com/pybind/pybind11/archive/v2.8.1.zip"],
         build_file = "@pybind11_bazel//:pybind11.BUILD",
-        sha256 = "a9b1ec90e085200a3f346c21fa5b79603e4e60750e29f57bcbf21feec844e54e",
-        strip_prefix = "pybind11-2.7.0/",
+        sha256 = "90907e50b76c8e04f1b99e751958d18e72c4cffa750474b5395a93042035e4a3",
+        strip_prefix = "pybind11-2.8.1/",
     )

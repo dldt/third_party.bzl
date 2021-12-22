@@ -6,10 +6,12 @@ def spirv_reflect_repository():
         http_archive,
         name = "spirv-reflect",
         urls = [
-            "https://github.com/KhronosGroup/SPIRV-Reflect/archive/ae205dc8a862df480b457df14bbc37515c98ee78.zip",
+            "https://github.com/KhronosGroup/SPIRV-Reflect/archive/173ae4d9bbcc8fd0307bea9f126cb50619ceff23.zip",
         ],
-        sha256 = "ab11900656285f38d5ba2d6a6a5ff06ecf7ec55ba41b0b214edc5940c6ed96a1",
-        strip_prefix = "SPIRV-Reflect-ae205dc8a862df480b457df14bbc37515c98ee78/",
+        sha256 = "92701812a3ec67744732a430861c775d66cf471a3a7f70405cfb5e3fd6c4aed3",
+        strip_prefix = "SPIRV-Reflect-173ae4d9bbcc8fd0307bea9f126cb50619ceff23/",
+        patches = ["@third_party//spirv-reflect:0001-CHANGES-does-not-exist-anymore.patch"],
+        patch_args = ["-p1"],
         repo_mapping = {
             "@spirv_headers": "@spirv-headers",
             "@com_google_effcee": "@effcee",

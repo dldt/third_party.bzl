@@ -15,7 +15,7 @@ CMAKE_DEFINES = [
 ]
 
 CMAKE_UNDEFS = [
-# opjconfigprivate
+    # opjconfigprivate
     "HAVE_MEMORY_H",
     "HAVE_STDLIB_H",
     "HAVE_STRINGS_H",
@@ -23,7 +23,6 @@ CMAKE_UNDEFS = [
     "HAVE_SYS_STAT_H",
     "HAVE_SYS_TYPES_H",
     "HAVE_UNISTD_H",
-
     "_LARGEFILE_SOURCE",
     "_LARGE_FILES",
     "_FILE_OFFSET_BITS",
@@ -51,17 +50,23 @@ cmake_configure_file(
 
 cc_library(
     name = "openjp2",
-    srcs = glob([
-        "src/lib/openjp2/*.c",
-    ], exclude = [
-        "src/lib/openjp2/test_*",
-        "src/lib/openjp2/bench_*",
-    ]),
+    srcs = glob(
+        [
+            "src/lib/openjp2/*.c",
+        ],
+        exclude = [
+            "src/lib/openjp2/test_*",
+            "src/lib/openjp2/bench_*",
+        ],
+    ),
     hdrs = glob([
         "src/lib/openjp2/*.h",
-    ]) + [":opjconfigprivate", ":opjconfig"],
-    includes = ["src/lib/openjp2/"],
+    ]) + [
+        ":opjconfigprivate",
+        ":opjconfig",
+    ],
     # defines = ["OPJ_STATIC"],
+    includes = ["src/lib/openjp2/"],
     local_defines = ["USE_JPIP"],
     visibility = ["//visibility:public"],
 )

@@ -6,9 +6,9 @@ def nanovg_repository():
         http_archive,
         name = "nanovg",
         urls = [
-            "https://github.com/memononen/nanovg/archive/077b65e0cf3e22ee4f588783e319b19b0a608065.zip",
+            "https://github.com/memononen/nanovg/archive/645e9147a8701c98f52240257af0c9d5fa640e86.zip",
         ],
-        sha256 = "1264d887c21f2b08abdef1e2ebd4ce862ef3496e9a4482738431d339f135c76c",
-        strip_prefix = "nanovg-077b65e0cf3e22ee4f588783e319b19b0a608065/",
+        sha256 = "e45976f5fe80d798d6e2a24618b172d128956b78d389f0cdbc446494d1b6bb31",
+        strip_prefix = "nanovg-645e9147a8701c98f52240257af0c9d5fa640e86/",
         build_file = "@third_party//nanovg:package.BUILD",
     )

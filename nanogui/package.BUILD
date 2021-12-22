@@ -29,7 +29,14 @@ cc_library(
     ) + [":nanogui_resources.c"],
     hdrs = glob(["include/**/*.h"]) + [":nanogui_resources.h"],
     defines = ["NANOGUI_GLAD"],
-    includes = [".", "include/"],
+    includes = [
+        ".",
+        "include/",
+    ],
+    linkopts = select({
+        ":windows": ["-DEFAULTLIB:Comdlg32"],
+        "//conditions:default": [],
+    }),
     visibility = ["//visibility:public"],
     deps = [
         "@eigen",
@@ -37,10 +44,6 @@ cc_library(
         "@glfw",
         "@nanovg",
     ],
-    linkopts = select({
-        ":windows": ["-DEFAULTLIB:Comdlg32"],
-        "//conditions:default": [],
-    }),
 )
 
 config_setting(

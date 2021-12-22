@@ -1,0 +1,24 @@
+From ddb50ee1889af59dd41e7e0b40fa99dbe210a367 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Wed, 22 Dec 2021 20:16:00 +0100
+Subject: [PATCH] CHANGES does not exist anymore
+
+---
+ BUILD.bazel | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/BUILD.bazel b/BUILD.bazel
+index c258aa2..72c6f96 100644
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -10,7 +10,6 @@ package(
+ licenses(["notice"])  # Apache 2.0
+ 
+ exports_files([
+-    "CHANGES",
+     "LICENSE",
+ ])
+ 
+-- 
+2.32.0
+

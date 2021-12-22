@@ -6,10 +6,10 @@ def glslang_repository():
         http_archive,
         name = "glslang",
         urls = [
-            "https://github.com/KhronosGroup/glslang/archive/50849374cb19559b1f85a0de1dc9b630cb1f4a07.zip",
+            "https://github.com/KhronosGroup/glslang/archive/9b20b25138bfe916173c9341075b996be14baa69.zip",
         ],
-        sha256 = "e602b6d4431c26092da0ec268ddbd1408e5e7668d78bca1e34a1eed5be6c29d0",
-        strip_prefix = "glslang-50849374cb19559b1f85a0de1dc9b630cb1f4a07/",
+        sha256 = "de41961c9ebfbe171cb426bfe1719713174d2322f82196a6972d13b7d8c49dd1",
+        strip_prefix = "glslang-9b20b25138bfe916173c9341075b996be14baa69/",
         repo_mapping = {
             "@com_google_googletest": "@gtest",
         },

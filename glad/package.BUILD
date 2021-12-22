@@ -24,7 +24,11 @@ genrule(
 
 cc_library(
     name = "glad",
-    srcs = [":glad.c", ":glad.h", ":khrplatform.h"],
+    srcs = [
+        ":glad.c",
+        ":glad.h",
+        ":khrplatform.h",
+    ],
     hdrs = [
         ":glad.h",
         ":khrplatform.h",

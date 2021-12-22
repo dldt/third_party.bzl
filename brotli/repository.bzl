@@ -5,7 +5,7 @@ def brotli_repository():
     maybe(
         http_archive,
         name = "brotli",
-        urls = ["https://github.com/google/brotli/archive/ce222e317e36aa362e83fc50c7a6226d238e03fd.zip"],
-        strip_prefix = "brotli-ce222e317e36aa362e83fc50c7a6226d238e03fd/",
-        sha256 = "c97352d1d08d18487b982cd03ff9477c12c2f90239767e9f3a9a4f93f965fca4",
+        urls = ["https://github.com/google/brotli/archive/e83c7b8e8fb8b696a1df6866bc46cbb76d7e0348.zip"],
+        strip_prefix = "brotli-e83c7b8e8fb8b696a1df6866bc46cbb76d7e0348/",
+        sha256 = "f716c5967228fb52256f3856a1bc081bdd5b7187bb24cfc4bc4f83e43504518a",
     )

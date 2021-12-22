@@ -6,7 +6,7 @@ def Imath_repository():
         http_archive,
         name = "Imath",
         build_file = "@third_party//Imath:package.BUILD",
-        strip_prefix = "Imath-3.1.1",
-        sha256 = "a63fe91d8d0917acdc31b0c9344b1d7dbc74bf42de3e3ef5ec982386324b9ea4",
-        urls = ["https://github.com/AcademySoftwareFoundation/Imath/archive/v3.1.1.tar.gz"],
+        strip_prefix = "Imath-3.1.3",
+        sha256 = "0bf7ec51162c4d17a4c5b850fb3f6f7a195cff9fa71f4da7735f74d7b5124320",
+        urls = ["https://github.com/AcademySoftwareFoundation/Imath/archive/v3.1.3.tar.gz"],
     )

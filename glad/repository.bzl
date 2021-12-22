@@ -6,9 +6,9 @@ def glad_repository():
         http_archive,
         name = "glad",
         urls = [
-            "https://github.com/Dav1dde/glad/archive/v0.1.34.zip",
+            "https://github.com/Dav1dde/glad/archive/v0.1.35.zip",
         ],
-        sha256 = "19b8a8b10deef3de4b31d3bde488d28d319db6968fd128be43c8040aef2a0622",
-        strip_prefix = "glad-0.1.34/glad/",
+        sha256 = "5dc4e283d8c130b2d5e41ea75ab4f777e120750813682fa68d1e5efbec4ff30c",
+        strip_prefix = "glad-0.1.35/glad/",
         build_file = "@third_party//glad:package.BUILD",
     )

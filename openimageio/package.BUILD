@@ -15,12 +15,12 @@ template_rule(
     substitutions = {
         "@CMAKE_CXX_STANDARD@": "20",
         "@PROJECT_VERSION_MAJOR@": "2",
-        "@PROJECT_VERSION_MINOR@": "2",
-        "@PROJECT_VERSION_PATCH@": "16",
-        "@PROJECT_VERSION_TWEAK@": "0",
+        "@PROJECT_VERSION_MINOR@": "3",
+        "@PROJECT_VERSION_PATCH@": "10",
+        "@PROJECT_VERSION_TWEAK@": "1",
         "@PROJECT_VERSION_RELEASE_TYPE@": "",
         "@PROJ_NAME@": "OIIO",
-        "@PROJ_NAMESPACE_V@": "OIIO_2_2",
+        "@PROJ_NAMESPACE_V@": "OIIO_2_3",
     },
 )
 
@@ -47,6 +47,7 @@ cc_library(
             "src/libOpenImageIO/*.cpp",
             "src/libOpenImageIO/*.h",
             "src/libOpenImageIO/*.hh",
+            "src/libOpenImageIO/*.inc",
             "src/libtexture/*.cpp",
             "src/libtexture/*.h",
             "src/libutil/*.cpp",
@@ -70,7 +71,7 @@ cc_library(
             "src/field3d.imageio/*",
             "src/openvdb.imageio/*",
         ],
-    ) + ["src/field3d.imageio/field3d_backdoor.h"], # Still be to able to include field3d_backdoor.h
+    ) + ["src/field3d.imageio/field3d_backdoor.h"],  # Still be to able to include field3d_backdoor.h
     hdrs = glob([
         "src/include/OpenImageIO/**/*.h",
         "src/include/OpenImageIO/detail/**",
@@ -79,15 +80,21 @@ cc_library(
         ":oiioimath",
         ":imageiopvt",
     ],
+    defines = ["OIIO_STATIC_DEFINE"],
     includes = [
         "src/dds.imageio/squish",
         "src/include/",
+        "src/include/OpenImageIO/",
         "src/libOpenImageIO/",
     ],
-    visibility = ["//visibility:public"],
+    linkopts = select({
+        ":windows": ["-DEFAULTLIB:Shell32.lib"],
+        "//conditions:default": ["-ldl"],
+    }),
     local_defines = ["EMBED_PLUGINS"],
-    defines = ["OIIO_STATIC_DEFINE"],
+    visibility = ["//visibility:public"],
     deps = [
+        "@Imath",
         "@boost//:algorithm",
         "@boost//:container",
         "@boost//:filesystem",
@@ -98,19 +105,15 @@ cc_library(
         "@boost//:throw_exception",
         "@boost//:tokenizer",
         "@fmt",
-        "@Imath",
         "@jpeg",
         "@openexr//:OpenEXR",
+        "@openexr//:OpenEXRCore",
         "@openjpeg//:openjp2",
         "@png",
         "@robin-map",
         "@tiff",
         "@webp",
     ],
-    linkopts = select({
-        ":windows": ["-DEFAULTLIB:Shell32.lib"],
-        "//conditions:default": ["-ldl"],
-    })
 )
 
 cc_binary(

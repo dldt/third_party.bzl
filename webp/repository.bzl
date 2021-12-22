@@ -6,9 +6,9 @@ def webp_repository():
         http_archive,
         name = "webp",
         build_file = "@third_party//webp:package.BUILD",
-        sha256 = "d60608c45682fa1e5d41c3c26c199be5d0184084cd8a971a6fc54035f76487d3",
-        strip_prefix = "libwebp-1.2.0/",
+        sha256 = "01bcde6a40a602294994050b81df379d71c40b7e39c819c024d079b3c56307f4",
+        strip_prefix = "libwebp-1.2.1/",
         urls = [
-            "https://github.com/webmproject/libwebp/archive/v1.2.0.tar.gz",
+            "https://github.com/webmproject/libwebp/archive/v1.2.1.tar.gz",
         ],
     )

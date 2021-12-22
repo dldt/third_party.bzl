@@ -17,7 +17,7 @@ index e8cf6a86..278b8779 100644
  licenses(["notice"])
  
 -exports_files(["LICENSE"])
-+exports_files(["LICENSE", "CHANGES.md"])
++exports_files(["LICENSE.txt", "CHANGES.md"])
  
  # Build information generation script
  py_binary(

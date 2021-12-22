@@ -107,7 +107,6 @@ cc_library(
         "jutils.c",
         "jversion.h",
     ],
-    includes = ["."],
     hdrs = [
         "jccolext.c",  # should have been named .inc
         "jdcol565.c",  # should have been named .inc
@@ -121,6 +120,7 @@ cc_library(
         "jstdhuff.c",  # should have been named .inc
     ],
     copts = libjpegturbo_copts,
+    includes = ["."],
     visibility = ["//visibility:public"],
     deps = select({
         ":k8": [":simd_x86_64"],
