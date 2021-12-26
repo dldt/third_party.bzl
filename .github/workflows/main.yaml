@@ -16,22 +16,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu, windows, macOS]
+        os: [ubuntu-latest, windows-latest, windows-2022, macOS-latest]
         include:
-          - os: ubuntu
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64
+          - os: ubuntu-latest
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
             bazelcachepath: "/home/runner/.cache/bazel/_bazel_runner"
-          - os: windows
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-windows-amd64.exe
+          - os: windows-latest
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-windows-amd64.exe
             bazelcachepath: "/Users/runner/_bazel_runner"
-          - os: macOS
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-darwin-amd64
+          - os: windows-2022
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-windows-amd64.exe
+            bazelcachepath: "/Users/runner/_bazel_runner"
+          - os: macOS-latest
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-darwin-amd64
             bazelcachepath: "/Users/runner/.cache/bazel/_bazel_runner"
 
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Setting up compiler (Linux)
-      if: runner.os == 'Linux'
+      if: startsWith(runner.os, 'Linux')
       run: |
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test
         sudo apt update
@@ -48,7 +51,7 @@ jobs:
       run: |
         New-Item -Type Directory -Path "${ENV:GITHUB_WORKSPACE}/bin/"
         Invoke-WebRequest -Uri "${{ matrix.bazelisk }}" -OutFile "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe"
-        if ("${{ matrix.os }}" -ne "windows") {
+        if (-Not ("${{ matrix.os }}".StartsWith("windows"))) {
           & chmod +x "${ENV:GITHUB_WORKSPACE}/bin/bazel.exe"
         }
       shell: pwsh
