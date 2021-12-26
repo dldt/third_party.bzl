@@ -7,7 +7,7 @@ startup --windows_enable_symlinks
 
 # Make sure build hierarchy is rooted under .bazel. It simplifies ignoring files
 # with bazel, vscode and others
-build --symlink_prefix=.bazel/ --experimental_no_product_name_out_symlink
+build --symlink_prefix=.bazel/
 
 ## Build
 
@@ -18,8 +18,6 @@ build --enable_platform_specific_config
 build --fission=yes
 
 ## Windows specific
-# Visual Studio version to use
-build:windows --action_env=BAZEL_VS="C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/"
 # Go for C++20 compliance
 build:windows --cxxopt="/std:c++latest" --host_cxxopt="/std:c++latest"
 build:windows --cxxopt="/permissive-" --host_cxxopt="/permissive-"
