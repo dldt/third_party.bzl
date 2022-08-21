@@ -6,10 +6,10 @@ def tinygltf_repository():
         http_archive,
         name = "tinygltf",
         urls = [
-            "https://github.com/syoyo/tinygltf/archive/v2.5.0.zip",
+            "https://github.com/syoyo/tinygltf/archive/3bddc09af4a7243d3b0ebbdd8dab8fa3893657c6.zip",
         ],
-        sha256 = "c75a242951c1324f6c58263e546d97691c566ac7285c4eb0b7d870227096f05f",
-        strip_prefix = "tinygltf-2.5.0/",
+        sha256 = "4e5cd78f1f1a620faa649730d9d5bfa43bf442cc5da0032e6d03aa49ee7fd02f",
+        strip_prefix = "tinygltf-3bddc09af4a7243d3b0ebbdd8dab8fa3893657c6/",
         build_file = "@third_party//tinygltf:package.BUILD",
         patches = ["@third_party//tinygltf:0001-use-external-nlohmann-json.patch"],
         patch_args = ["-p1"],

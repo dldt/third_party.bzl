@@ -1,0 +1,39 @@
+From 610ec323ff0c918fb6f6469266b3fab556f59b1e Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Thu, 8 Sep 2022 13:53:34 -0400
+Subject: [PATCH 1/3] Relocate stb include directives
+
+---
+ src/fontstash.h | 2 +-
+ src/nanovg.c    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/fontstash.h b/src/fontstash.h
+index d4cabfd..3738f8a 100644
+--- a/src/fontstash.h
++++ b/src/fontstash.h
+@@ -164,7 +164,7 @@ static void* fons__tmpalloc(size_t size, void* up);
+ static void fons__tmpfree(void* ptr, void* up);
+ #define STBTT_malloc(x,u)    fons__tmpalloc(x,u)
+ #define STBTT_free(x,u)      fons__tmpfree(x,u)
+-#include <stb/stb_truetype.h>
++#include <stb_truetype.h>
+ 
+ struct FONSttFontImpl {
+ 	stbtt_fontinfo font;
+diff --git a/src/nanovg.c b/src/nanovg.c
+index 34385f9..e77216c 100644
+--- a/src/nanovg.c
++++ b/src/nanovg.c
+@@ -30,7 +30,7 @@
+ 
+ #ifndef NVG_NO_STB
+ #define STB_IMAGE_IMPLEMENTATION
+-#include <stb/stb_image.h>
++#include <stb_image.h>
+ #endif
+ 
+ #ifdef _MSC_VER
+-- 
+2.38.0.windows.1
+

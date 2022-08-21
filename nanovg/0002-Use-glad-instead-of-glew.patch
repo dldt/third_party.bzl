@@ -1,0 +1,62 @@
+From e19e70f2b6fa56db2ddba3588973721dbf132671 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Tue, 18 Oct 2022 18:14:43 -0400
+Subject: [PATCH 2/3] Use glad instead of glew
+
+---
+ src/nanovg_gl.c       | 14 +++++++-------
+ src/nanovg_gl_utils.c |  4 ++--
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/src/nanovg_gl.c b/src/nanovg_gl.c
+index b22fd47..ab8a8e6 100644
+--- a/src/nanovg_gl.c
++++ b/src/nanovg_gl.c
+@@ -27,9 +27,9 @@
+ 
+ #include "android.h"
+ 
+-#ifdef NANOVG_USE_GLEW
+-#  include <GL/glew.h>
+-static int glew_initialized = 0;
++#ifdef NANOVG_USE_GLAD
++#  include <glad.h>
++static int glad_initialized = 0;
+ #endif
+ 
+ #ifdef NANOVG_GLES2
+@@ -1518,12 +1518,12 @@ NVGcontext* nvgCreateGLES3(int flags)
+ #endif
+ {
+ 	#ifdef NANOVG_USE_GLEW
+-	if (!glew_initialized) {
+-		if (glewInit() == GLEW_OK) {
++	if (!glad_initialized) {
++		if (gladLoadGL()) {
+ 			glew_initialized = 1;
+ 		} else {
+-			printf("Failed to initialize GLEW");
+-			// GLEW generates GL error because it calls glGetString(GL_EXTENSIONS), we'll consume it here.
++			printf("Failed to initialize GLAD");
++			// GLAD generates GL error because it calls glGetString(GL_EXTENSIONS), we'll consume it here.
+ 			glGetError();
+ 		}
+ 	}
+diff --git a/src/nanovg_gl_utils.c b/src/nanovg_gl_utils.c
+index 89bac79..d32aac4 100644
+--- a/src/nanovg_gl_utils.c
++++ b/src/nanovg_gl_utils.c
+@@ -27,8 +27,8 @@
+ 
+ #include "android.h"
+ 
+-#ifdef NANOVG_USE_GLEW
+-#  include <GL/glew.h>
++#ifdef NANOVG_USE_GLAD
++#  include <glad.h>
+ #endif
+ 
+ #ifdef NANOVG_GLES2
+-- 
+2.38.0.windows.1
+

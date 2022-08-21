@@ -6,11 +6,9 @@ def fmt_repository():
         http_archive,
         name = "fmt",
         urls = [
-            "https://github.com/fmtlib/fmt/archive/8.0.1.zip",
+            "https://github.com/fmtlib/fmt/archive/9.0.0.zip",
         ],
-        sha256 = "6747442c189064b857336007dd7fa3aaf58512aa1a0b2ba76bf1182eefb01025",
-        strip_prefix = "fmt-8.0.1/",
+        sha256 = "01867bffc0b30ac71d5f05854e62e451367fa1aceddef40cae965338a7e00a74",
+        strip_prefix = "fmt-9.0.0/",
         build_file = "@third_party//fmt:package.BUILD",
-        patches = ["@third_party//fmt:0001-Workaround-compilation-issue-with-Apple-Clang.patch"],
-        patch_args = ["-p1"],
     )

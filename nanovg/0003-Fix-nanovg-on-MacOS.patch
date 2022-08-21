@@ -1,0 +1,29 @@
+From 412846990dde2e71ac223a3286c8c976306d7cf8 Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Wed, 19 Oct 2022 07:43:17 -0400
+Subject: [PATCH 3/3] Fix nanovg on MacOS
+
+---
+ src/nanovg_gl_utils.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/nanovg_gl_utils.c b/src/nanovg_gl_utils.c
+index d32aac4..5f821ce 100644
+--- a/src/nanovg_gl_utils.c
++++ b/src/nanovg_gl_utils.c
+@@ -41,8 +41,12 @@
+ #endif
+ 
+ #if defined(NANOVG_GL2) || defined(NANOVG_GL3)
++#if defined(__APPLE__)
++#include <OpenGL/gl.h>
++#else
+ #include <GL/gl.h>
+ #endif
++#endif
+ 
+ #include "nanovg_gl_utils.h"
+ 
+-- 
+2.38.0.windows.1
+

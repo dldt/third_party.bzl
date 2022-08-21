@@ -1,0 +1,25 @@
+From 77f671a73f91dc71f63e32c98573ffd4429717eb Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Tue, 18 Oct 2022 13:04:16 -0400
+Subject: [PATCH 3/3] Fix conflict between fmt and std::format with c++20
+
+---
+ src/include/OpenImageIO/typedesc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/include/OpenImageIO/typedesc.h b/src/include/OpenImageIO/typedesc.h
+index b45852c7..9dd05e9b 100644
+--- a/src/include/OpenImageIO/typedesc.h
++++ b/src/include/OpenImageIO/typedesc.h
+@@ -602,7 +602,7 @@ struct formatter<OIIO::TypeDesc> {
+     auto format(const OIIO::TypeDesc& t, FormatContext& ctx) -> decltype(ctx.out()) const {
+         // C++14:   auto format(const OIIO::TypeDesc& p, FormatContext& ctx) const {
+         // ctx.out() is an output iterator to write to.
+-        return format_to(ctx.out(), "{}", t.c_str());
++        return fmt::format_to(ctx.out(), "{}", t.c_str());
+     }
+ };
+ FMT_END_NAMESPACE
+-- 
+2.38.0.windows.1
+

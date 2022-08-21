@@ -56,6 +56,7 @@ cc_library(
         "src/x11_init.c",
         "src/x11_monitor.c",
         "src/x11_window.c",
+        "src/xkb_unicode.c",
     ],
     hdrs = glob([
         "include/**/*.h",
@@ -112,7 +113,6 @@ cc_library(
         "src/osmesa_context.c",
         "src/vulkan.c",
         "src/window.c",
-        "src/xkb_unicode.c",
     ],
     hdrs = [
         "include/GLFW/glfw3.h",

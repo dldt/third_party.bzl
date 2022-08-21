@@ -1,5 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
-load("@third_party//:defs.bzl", "template_rule")
+load("@third_party//:defs.bzl", "cmake_configure_file")
 
 config_setting(
     name = "windows",
@@ -8,36 +8,51 @@ config_setting(
     ],
 )
 
-template_rule(
+cmake_configure_file(
     name = "oiioversion",
     src = "src/include/OpenImageIO/oiioversion.h.in",
     out = "src/include/OpenImageIO/oiioversion.h",
-    substitutions = {
-        "@CMAKE_CXX_STANDARD@": "20",
-        "@PROJECT_VERSION_MAJOR@": "2",
-        "@PROJECT_VERSION_MINOR@": "3",
-        "@PROJECT_VERSION_PATCH@": "10",
-        "@PROJECT_VERSION_TWEAK@": "1",
-        "@PROJECT_VERSION_RELEASE_TYPE@": "",
-        "@PROJ_NAME@": "OIIO",
-        "@PROJ_NAMESPACE_V@": "OIIO_2_3",
-    },
+    defines = [
+        "CMAKE_CXX_STANDARD=20",
+        "PROJECT_VERSION_MAJOR=2",
+        "PROJECT_VERSION_MINOR=4",
+        "PROJECT_VERSION_PATCH=4",
+        "PROJECT_VERSION_TWEAK=2",
+        "PROJECT_VERSION_RELEASE_TYPE=",
+        "PROJ_NAME=OIIO",
+        "PROJ_NAMESPACE_V=OIIO_2_4",
+        "OIIO_TBB=1",
+        "OIIO_USING_IMATH=3",
+        "Imath_VERSION_MAJOR=3",
+        "Imath_VERSION_MINOR=1",
+    ],
 )
 
-template_rule(
+cmake_configure_file(
     name = "oiioimath",
     src = "src/include/OpenImageIO/Imath.h.in",
     out = "src/include/OpenImageIO/Imath.h",
-    substitutions = {
-        "@OIIO_USING_IMATH@": "3",
-    },
+    defines = [
+        "OIIO_USING_IMATH=3"]
+    ,
 )
 
-template_rule(
+cmake_configure_file(
+    name = "oiiohalf",
+    src = "src/include/OpenImageIO/half.h.in",
+    out = "src/include/OpenImageIO/half.h",
+    defines = [
+        "OIIO_USING_IMATH=3"]
+    ,
+)
+
+cmake_configure_file(
     name = "imageiopvt",
     src = "src/libOpenImageIO/imageio_pvt.h.in",
     out = "src/libOpenImageIO/imageio_pvt.h",
-    substitutions = {},
+    defines = [
+        "PLUGIN_SEARCH_PATH_NATIVE=",
+    ],
 )
 
 cc_library(
@@ -71,13 +86,14 @@ cc_library(
             "src/field3d.imageio/*",
             "src/openvdb.imageio/*",
         ],
-    ) + ["src/field3d.imageio/field3d_backdoor.h"],  # Still be to able to include field3d_backdoor.h
+    ),
     hdrs = glob([
         "src/include/OpenImageIO/**/*.h",
         "src/include/OpenImageIO/detail/**",
     ]) + [
         ":oiioversion",
         ":oiioimath",
+        ":oiiohalf",
         ":imageiopvt",
     ],
     defines = ["OIIO_STATIC_DEFINE"],
@@ -111,6 +127,7 @@ cc_library(
         "@openjpeg//:openjp2",
         "@png",
         "@robin-map",
+        "@tbb",
         "@tiff",
         "@webp",
     ],

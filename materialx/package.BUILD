@@ -140,6 +140,7 @@ cc_library(
     hdrs = glob([
         "source/MaterialXRender/*.h",
     ]) + [
+        "source/MaterialXRender/External/Cgltf/cgltf.h",
         "source/MaterialXRender/External/TinyObjLoader/tiny_obj_loader.h",
         "source/MaterialXRender/External/StbImage/stb_image.h",
         "source/MaterialXRender/External/StbImage/stb_image_write.h",
@@ -182,8 +183,8 @@ cc_library(
     name = "MaterialXRenderGlsl_default",
     srcs = glob([
         "source/MaterialXRenderGlsl/*.cpp",
-        "source/MaterialXRenderGlsl/External/GLew/*.cpp",
-        "source/MaterialXRenderGlsl/External/GLew/*.h",
+        "source/MaterialXRenderGlsl/External/Glad/*.cpp",
+        "source/MaterialXRenderGlsl/External/Glad/*.h",
     ]),
     hdrs = glob([
         "source/MaterialXRenderGlsl/*.h",

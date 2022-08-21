@@ -6,9 +6,9 @@ def lz4_repository():
         http_archive,
         name = "lz4",
         urls = [
-            "https://github.com/lz4/lz4/archive/v1.9.3.zip",
+            "https://github.com/lz4/lz4/archive/v1.9.4.zip",
         ],
-        sha256 = "4ec935d99aa4950eadfefbd49c9fad863185ac24c32001162c44a683ef61b580",
-        strip_prefix = "lz4-1.9.3/",
+        sha256 = "37e63d56fb9cbe2e430c7f737a404cd4b98637b05e1467459d5c8fe1a4364cc3",
+        strip_prefix = "lz4-1.9.4/",
         build_file = "@third_party//lz4:package.BUILD",
     )

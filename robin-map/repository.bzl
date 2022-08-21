@@ -6,9 +6,9 @@ def robin_map_repository():
         http_archive,
         name = "robin-map",
         urls = [
-            "https://github.com/Tessil/robin-map/archive/v0.6.3.zip",
+            "https://github.com/Tessil/robin-map/archive/v1.0.1.zip",
         ],
-        sha256 = "6e04a4500379bba64978b492560adaf5b57e751684f5e607f455a762f0122dbf",
-        strip_prefix = "robin-map-0.6.3/",
+        sha256 = "863a0ed49116c5d123b1d0a87f98d2f8e25882d1d8de6cc21f01cdaaa0d9ce31",
+        strip_prefix = "robin-map-1.0.1/",
         build_file = "@third_party//robin-map:package.BUILD",
     )

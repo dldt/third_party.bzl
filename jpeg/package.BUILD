@@ -602,6 +602,13 @@ JCONFIGINT_NOWIN_SUBSTITUTIONS.update(JCONFIGINT_COMMON_SUBSTITUTIONS)
 JCONFIGINT_WIN_SUBSTITUTIONS.update(JCONFIGINT_COMMON_SUBSTITUTIONS)
 
 template_rule(
+    name = "jversionh",
+    src = "jversion.h.in",
+    out = "jversion.h",
+    substitutions = { "@COPYRIGHT_YEAR@": "2022" }
+)
+
+template_rule(
     name = "jconfigint_nowin",
     src = "jconfigint.h.in",
     out = "jconfigint_nowin.h",

@@ -6,10 +6,10 @@ def SDL_repository():
         http_archive,
         name = "SDL",
         build_file = "@third_party//SDL:package.BUILD",
-        sha256 = "2c1e870d74e13dfdae870600bfcb6862a5eab4ea5b915144aff8d75a0f9bf046",
-        strip_prefix = "SDL2-2.0.14/",
+        sha256 = "74aaf31c730d537114f6919a45c9b693bbed9308211bf4c9613d252faf02e847",
+        strip_prefix = "SDL2-2.24.1/",
         urls = [
-            "https://www.libsdl.org/release/SDL2-2.0.14.zip",
+            "https://www.libsdl.org/release/SDL2-2.24.1.zip",
         ],
         patch_cmds = ["rm -f include/SDL_config.h"],
         patch_cmds_win = ["rm -Force include/SDL_config.h"],
