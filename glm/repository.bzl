@@ -6,10 +6,10 @@ def glm_repository():
         http_archive,
         name = "glm",
         urls = [
-            "https://github.com/g-truc/glm/archive/6ad79aae3eb5bf809c30bf1168171e9e55857e45.zip",
+            "https://github.com/g-truc/glm/archive/cc98465e3508535ba8c7f6208df934c156a018dc.zip",
         ],
-        sha256 = "9a147a2b58df9fc30ec494468f6b974489a72aecbaa9062dd1d375379e011b70",
-        strip_prefix = "glm-6ad79aae3eb5bf809c30bf1168171e9e55857e45/",
+        sha256 = "06d48e336857777d2d1f7da9ccd59e4b9d79720dbd70886d48837d19cda997bb",
+        strip_prefix = "glm-cc98465e3508535ba8c7f6208df934c156a018dc/",
         build_file = "@third_party//glm:package.BUILD",
         patches = [
             "@third_party//glm:0001-Works-around-Visual-Studio-compiler-issue-with-std-c.patch",

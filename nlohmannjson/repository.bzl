@@ -6,8 +6,8 @@ def nlohmannjson_repository():
         http_archive,
         name = "nlohmannjson",
         urls = [
-            "https://github.com/nlohmann/json/releases/download/v3.10.4/include.zip",
+            "https://github.com/nlohmann/json/releases/download/v3.11.2/include.zip",
         ],
-        sha256 = "62c585468054e2d8e7c2759c0d990fd339d13be988577699366fe195162d16cb",
+        sha256 = "e5c7a9f49a16814be27e4ed0ee900ecd0092bfb7dbfca65b5a421b774dccaaed",
         build_file = "@third_party//nlohmannjson:package.BUILD",
     )

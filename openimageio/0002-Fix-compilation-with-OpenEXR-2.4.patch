@@ -1,0 +1,55 @@
+From 1c5c1cf337600a2a057517dc7bf0d5191808547e Mon Sep 17 00:00:00 2001
+From: Thomas Arcila <thomas.arcila@gmail.com>
+Date: Mon, 17 Oct 2022 17:44:14 -0400
+Subject: [PATCH 2/3] Fix compilation with OpenEXR 2.4
+
+---
+ src/openexr.imageio/exrinput.cpp   | 4 ++--
+ src/openexr.imageio/exrinput_c.cpp | 2 +-
+ src/openexr.imageio/exroutput.cpp  | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/openexr.imageio/exrinput.cpp b/src/openexr.imageio/exrinput.cpp
+index d6661de8..6de3f70a 100644
+--- a/src/openexr.imageio/exrinput.cpp
++++ b/src/openexr.imageio/exrinput.cpp
+@@ -29,8 +29,8 @@
+ OIIO_PRAGMA_VISIBILITY_PUSH
+ OIIO_PRAGMA_WARNING_PUSH
+ OIIO_GCC_PRAGMA(GCC diagnostic ignored "-Wunused-parameter")
+-#include <OpenEXR/IexBaseExc.h>
+-#include <OpenEXR/IexThrowErrnoExc.h>
++#include <Iex/IexBaseExc.h>
++#include <Iex/IexThrowErrnoExc.h>
+ #include <OpenEXR/ImfBoxAttribute.h>
+ #include <OpenEXR/ImfChromaticitiesAttribute.h>
+ #include <OpenEXR/ImfCompressionAttribute.h>
+diff --git a/src/openexr.imageio/exrinput_c.cpp b/src/openexr.imageio/exrinput_c.cpp
+index 351ecf31..90f6b422 100644
+--- a/src/openexr.imageio/exrinput_c.cpp
++++ b/src/openexr.imageio/exrinput_c.cpp
+@@ -18,7 +18,7 @@
+ 
+ #include "exr_pvt.h"
+ 
+-#include <OpenEXR/openexr.h>
++#include <OpenEXRCore/openexr.h>
+ 
+ #include "imageio_pvt.h"
+ #include <OpenImageIO/dassert.h>
+diff --git a/src/openexr.imageio/exroutput.cpp b/src/openexr.imageio/exroutput.cpp
+index fa36cad2..b9b60c14 100644
+--- a/src/openexr.imageio/exroutput.cpp
++++ b/src/openexr.imageio/exroutput.cpp
+@@ -39,7 +39,7 @@
+ OIIO_PRAGMA_VISIBILITY_PUSH
+ OIIO_PRAGMA_WARNING_PUSH
+ OIIO_GCC_PRAGMA(GCC diagnostic ignored "-Wunused-parameter")
+-#include <OpenEXR/IexBaseExc.h>
++#include <Iex/IexBaseExc.h>
+ #include <OpenEXR/ImfBoxAttribute.h>
+ #include <OpenEXR/ImfCRgbaFile.h>  // JUST to get symbols to figure out version!
+ #include <OpenEXR/ImfChromaticitiesAttribute.h>
+-- 
+2.38.0.windows.1
+

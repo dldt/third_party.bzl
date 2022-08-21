@@ -6,10 +6,10 @@ def tbb_repository():
         http_archive,
         name = "tbb",
         urls = [
-            "https://github.com/oneapi-src/oneTBB/archive/v2021.4.0.zip",
+            "https://github.com/oneapi-src/oneTBB/archive/v2021.5.0.zip",
         ],
-        sha256 = "08ade531be2e4e904eb6bec8e01da51eb3b0e4e86738128eb2722b95e3fcb5e6",
-        strip_prefix = "oneTBB-2021.4.0/",
+        sha256 = "83ea786c964a384dd72534f9854b419716f412f9d43c0be88d41874763e7bb47",
+        strip_prefix = "oneTBB-2021.5.0/",
         build_file = "@third_party//tbb:package.BUILD",
         patches = ["@third_party//tbb:0001-tbb-governor-Fix-invalid-implicit-cast.patch"],
         patch_args = ["-p1"],

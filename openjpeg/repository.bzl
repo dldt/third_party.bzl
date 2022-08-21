@@ -6,9 +6,9 @@ def openjpeg_repository():
         http_archive,
         name = "openjpeg",
         build_file = "@third_party//openjpeg:package.BUILD",
-        sha256 = "99443e5b162a8adedb51093c51baaec6dd42f790a823ed2f2367af84ca008c85",
-        strip_prefix = "openjpeg-2.4.0/",
+        sha256 = "ed265742e2d24efa0bcc2dd25e67840e2bde562fb7867204604566f26ae43c0e",
+        strip_prefix = "openjpeg-2.5.0/",
         urls = [
-            "https://github.com/uclouvain/openjpeg/archive/v2.4.0.zip",
+            "https://github.com/uclouvain/openjpeg/archive/v2.5.0.zip",
         ],
     )

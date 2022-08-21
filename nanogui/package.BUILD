@@ -12,7 +12,7 @@ cc_binary(
 
 genrule(
     name = "resources",
-    srcs = glob(["resources/*.ttf"]),
+    srcs = glob(["resources/*.ttf", "resources/*.gl"]),
     outs = [
         "nanogui_resources.c",
         "nanogui_resources.h",
@@ -24,11 +24,11 @@ genrule(
 cc_library(
     name = "nanogui",
     srcs = glob(
-        ["src/*.cpp"],
+        ["src/*.cpp", "src/*.h"],
         exclude = ["src/example*.cpp"],
     ) + [":nanogui_resources.c"],
     hdrs = glob(["include/**/*.h"]) + [":nanogui_resources.h"],
-    defines = ["NANOGUI_GLAD"],
+    defines = ["NANOGUI_USE_OPENGL", "NANOGUI_GLAD"],
     includes = [
         ".",
         "include/",
@@ -43,6 +43,7 @@ cc_library(
         "@glad",
         "@glfw",
         "@nanovg",
+        "@stb//:image",
     ],
 )
 

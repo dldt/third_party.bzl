@@ -6,10 +6,9 @@ def zlib_repository():
         http_archive,
         name = "zlib",
         urls = [
-            "http://www.zlib.net/zlib1211.zip",
-            "http://prdownloads.sourceforge.net/libpng/zlib1211.zip?download",
+            "https://www.zlib.net/zlib1213.zip",
         ],
-        sha256 = "d7510a8ee1918b7d0cad197a089c0a2cd4d6df05fee22389f67f115e738b178d",
-        strip_prefix = "zlib-1.2.11/",
+        sha256 = "d233fca7cf68db4c16dc5287af61f3cd01ab62495224c66639ca3da537701e42",
+        strip_prefix = "zlib-1.2.13/",
         build_file = "@third_party//zlib:package.BUILD",
     )

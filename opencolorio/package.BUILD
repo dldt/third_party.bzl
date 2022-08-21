@@ -6,11 +6,11 @@ template_rule(
     src = "include/OpenColorIO/OpenColorABI.h.in",
     out = "include/OpenColorIO/OpenColorABI.h",
     substitutions = {
-        "@OpenColorIO_VERSION@": "2.0.0",
-        "@OpenColorIO_VERSION_RELEASE_TYPE@": "rc1",
+        "@OpenColorIO_VERSION@": "2.1.2",
+        "@OpenColorIO_VERSION_RELEASE_TYPE@": "",
         "@OpenColorIO_VERSION_MAJOR@": "2",
-        "@OpenColorIO_VERSION_MINOR@": "0",
-        "@OpenColorIO_VERSION_PATCH@": "0",
+        "@OpenColorIO_VERSION_MINOR@": "1",
+        "@OpenColorIO_VERSION_PATCH@": "2",
     },
 )
 
@@ -22,7 +22,7 @@ cc_library(
     ]),
     hdrs = glob([
         "include/OpenImageIO/**/*.h",
-    ]) + [":oiiovocioabiersion"],
+    ]) + [":ocioabi"],
     includes = ["include/"],
     deps = [
     ],

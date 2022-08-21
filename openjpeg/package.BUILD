@@ -4,11 +4,11 @@ load("@third_party//:defs.bzl", "cmake_configure_file")
 CMAKE_DEFINES = [
     # opjconfig
     "OPENJPEG_VERSION_MAJOR=2",
-    "OPENJPEG_VERSION_MINOR=4",
+    "OPENJPEG_VERSION_MINOR=5",
     "OPENJPEG_VERSION_BUILD=0",
     # opjconfigprivate
     "OPJ_HAVE_INTTYPES_H=1",
-    "PACKAGE_VERSION=2.4.0",
+    "PACKAGE_VERSION=2.5.0",
     "OPJ_HAVE_ALIGNED_ALLOC",
     "OPJ_HAVE_MALLOC_H=1",
     "OPJ_HAVE_STDINT_H=1",
@@ -65,8 +65,7 @@ cc_library(
         ":opjconfigprivate",
         ":opjconfig",
     ],
-    # defines = ["OPJ_STATIC"],
     includes = ["src/lib/openjp2/"],
-    local_defines = ["USE_JPIP"],
+    local_defines = ["OPJ_EXPORTS", "USE_JPIP"],
     visibility = ["//visibility:public"],
 )

@@ -6,10 +6,10 @@ def tiff_repository():
         http_archive,
         name = "tiff",
         build_file = "@third_party//tiff:package.BUILD",
-        sha256 = "eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb",
-        strip_prefix = "tiff-4.2.0",
+        sha256 = "917223b37538959aca3b790d2d73aa6e626b688e02dcda272aec24c2f498abed",
+        strip_prefix = "tiff-4.4.0",
         urls = [
-            "https://download.osgeo.org/libtiff/tiff-4.2.0.tar.gz",
+            "https://download.osgeo.org/libtiff/tiff-4.4.0.tar.gz",
         ],
         # Quick and dirty workaround: bazel will add the patch extern/tiff.
         # This will expose libtiff's VERSION file that will conflict with

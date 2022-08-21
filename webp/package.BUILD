@@ -14,6 +14,8 @@ cc_library(
         "src/enc/*.c",
         "src/enc/*.h",
         "src/webp/*.h",
+        "sharpyuv/*.c",
+        "sharpyuv/*.h",
     ]) + [
         "imageio/imageio_util.c",
         "imageio/webpdec.c",

@@ -6,9 +6,9 @@ def SDL_image_repository():
         http_archive,
         name = "SDL_image",
         build_file = "@third_party//SDL_image:package.BUILD",
-        sha256 = "eee0927d1e7819d57c623fe3e2b3c6761c77c474fe9bc425e8674d30ac049b1c",
-        strip_prefix = "SDL2_image-2.0.5/",
+        sha256 = "efe3c229853d0d40c35e5a34c3f532d5d9728f0abc623bc62c962bcef8754205",
+        strip_prefix = "SDL2_image-2.6.2/",
         urls = [
-            "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip",
+            "https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.6.2.zip",
         ],
     )

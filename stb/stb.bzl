@@ -20,7 +20,7 @@ def stb_library(name, emit_definition_macro = None, stb_prefix = True, copts = [
     cc_library(
         name = name,
         hdrs = [header_file_name],
-        include_prefix = "stb",
+        includes = [".", "stb"],
         srcs = [header_file_name] +
             [":{}_impl.c".format(name)] if emit_definition_macro else [],
         copts = copts,

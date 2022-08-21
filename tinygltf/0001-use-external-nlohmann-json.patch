@@ -18,8 +18,8 @@ index 02030bc..43a9354 100644
 -#include "json.hpp"
 +#include "nlohmann/json.hpp"
  #else
+ #ifndef TINYGLTF_NO_INCLUDE_RAPIDJSON
  #include "document.h"
- #include "prettywriter.h"
 -- 
 2.29.2
 

@@ -6,14 +6,16 @@ def openimageio_repository():
         http_archive,
         name = "openimageio",
         urls = [
-            "https://github.com/OpenImageIO/oiio/archive/v2.3.10.1.zip",
+            "https://github.com/OpenImageIO/oiio/archive/v2.4.4.2.zip",
         ],
-        sha256 = "48ce9b9c3e815885f5634438fed3e240ad186fd9e30d392e17564b5e9eebb089",
-        strip_prefix = "oiio-2.3.10.1/",
+        sha256 = "c99ae76dc336c82dbaab14816a8506154626b80aee411947dba2ff4a811d6403",
+        strip_prefix = "oiio-2.4.4.2/",
         build_file = "@third_party//openimageio:package.BUILD",
         patches = [
-            "@third_party//openimageio:0001-strutil-Use-external-fmtlib.patch",
-            "@third_party//openimageio:0002-Fix-compilation-with-latest-OpenEXR.patch",
+            "@third_party//openimageio:0001-details-fmt-Use-external-fmtlib.patch",
+            "@third_party//openimageio:0002-Fix-compilation-with-OpenEXR.patch",
+            "@third_party//openimageio:0003-Fix-conflict-between-fmt-and-std-format-with-c-20.patch",
+
         ],
         patch_args = ["-p1"],
     )
