@@ -16,19 +16,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, windows-2022, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
         include:
           - os: ubuntu-latest
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-linux-amd64
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.14.0/bazelisk-linux-amd64
             bazelcachepath: "/home/runner/.cache/bazel/_bazel_runner"
           - os: windows-latest
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-windows-amd64.exe
-            bazelcachepath: "/Users/runner/_bazel_runner"
-          - os: windows-2022
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-windows-amd64.exe
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.14.0/bazelisk-windows-amd64.exe
             bazelcachepath: "/Users/runner/_bazel_runner"
           - os: macOS-latest
-            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.11.0/bazelisk-darwin-amd64
+            bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.14.0/bazelisk-darwin-amd64
             bazelcachepath: "/Users/runner/.cache/bazel/_bazel_runner"
 
     runs-on: ${{ matrix.os }}
