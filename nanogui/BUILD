@@ -1,1 +1,1 @@
-exports_files(["bin2c.cpp"])
+exports_files(["bin2c.cpp", "package.BUILD", ])

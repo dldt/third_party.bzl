@@ -1,0 +1,1 @@
+exports_files(["0001-Export-CHANGES.md-so-that-shaderc-and-other-can-extr.patch"])

@@ -1,1 +1,1 @@
-exports_files(["tomlplusplus.cpp"])
+exports_files(["tomlplusplus.cpp", "package.BUILD", ])

@@ -11,6 +11,4 @@ def cli11_repository():
         sha256 = "8883ab475b055a4284f0cba53f1ba40a2d8807ea4c1cbafda4bc2705832d0c33",
         strip_prefix = "CLI11-a66ae4145779c56dc0f9f98a631656417dd77de8/",
         build_file = "@third_party//cli11:package.BUILD",
-        patch_cmds = ["rm -fr tests/mesonTest/subprojects/CLI11"],
-        patch_cmds_win = ["rm -Recurse -Force tests/mesonTest/subprojects/CLI11"],
     )
