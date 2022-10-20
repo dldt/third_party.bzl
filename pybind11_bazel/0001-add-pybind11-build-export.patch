@@ -1,0 +1,8 @@
+--- a/BUILD	2021-12-03 20:09:09.000000000 -0500
++++ b/BUILD	2022-11-06 19:11:25.149352345 -0500
+@@ -1,4 +1,4 @@
+ # Bazel extensions for pybind11
+ licenses(["notice"])
+ 
+-exports_files(["LICENSE"])
++exports_files(["LICENSE", "pybind11.BUILD"])

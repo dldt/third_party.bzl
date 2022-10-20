@@ -124,6 +124,7 @@ objc_library(
         "Metal",
         "GameController",
     ],
+    target_compatible_with = ["@platforms//os:osx"],
 )
 
 cc_library(
@@ -175,6 +176,7 @@ cc_library(
         "-ldl",
         "-pthread",
     ],
+    target_compatible_with = ["@platforms//os:linux"],
 )
 
 cc_library(
@@ -231,6 +233,7 @@ cc_library(
         "-DEFAULTLIB:shell32",
         "-DEFAULTLIB:dinput8",
     ],
+    target_compatible_with = ["@platforms//os:windows"],
 )
 
 cc_library(
@@ -240,6 +243,7 @@ cc_library(
         "src/main/windows/SDL_windows_main.c",
     ],
     deps = [":SDL"],
+    target_compatible_with = ["@platforms//os:windows"],
 )
 
 cc_library(
@@ -249,6 +253,11 @@ cc_library(
         "src/main/dummy/SDL_dummy_main.c",
     ],
     deps = [":SDL"],
+    target_compatible_with = select({
+        "@platforms//os:windows": ["@platforms//:incompatible"],
+        "//conditions:default": [],
+    }),
+
 )
 
 alias(
