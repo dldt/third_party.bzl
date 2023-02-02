@@ -20,10 +20,8 @@ jobs:
         include:
           - os: ubuntu-latest
             bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.14.0/bazelisk-linux-amd64
-            bazelcachepath: "/home/runner/.cache/bazel/_bazel_runner"
           - os: windows-latest
             bazelisk: https://github.com/bazelbuild/bazelisk/releases/download/v1.14.0/bazelisk-windows-amd64.exe
-            bazelcachepath: "/Users/runner/_bazel_runner"
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -38,7 +36,9 @@ jobs:
     - name: Mount bazel cache
       uses: actions/cache@v3
       with:
-        path: "${{ matrix.bazelcachepath }}"
+        path: |
+          ~/.cache/bazel/_bazel_runner
+          ~/_bazel_runneradmin
         key: ${{ runner.os }}-bazel
 
     - name: Install bazelisk
