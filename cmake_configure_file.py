@@ -17,10 +17,10 @@ import sys
 from collections import OrderedDict
 
 # Looks like "#cmakedefine VAR ..." or "#cmakedefine01 VAR".
-_cmakedefine = re.compile(r'^(\s*)#cmakedefine(01)? ([^ \r\n]+)(.*?)([\r\n]+)')
+_cmakedefine = re.compile(r'^(\s*)#cmakedefine(01)? ([^ \r\n]+)(.*?)([\r\n]*)$')
 
 # Looks like "@VAR@" or "${VAR}".
-_varsubst = re.compile(r'^(.*?)(@[^ ]+?@|\$\{[^ ]+?\})(.*)([\r\n]*)')
+_varsubst = re.compile(r'^(.*?)(@[^ ]+?@|\$\{[^ ]+?\})(.*)([\r\n]*)$')
 
 
 # Transform a source code line per CMake's configure_file semantics.
