@@ -251,7 +251,7 @@ cc_library(
 )
 
 cc_binary(
-    name = "zstdcli",
+    name = "zstd-cli",
     srcs = glob(
         [
             "programs/*.c",
